@@ -1,0 +1,72 @@
+m4_changequote([[, ]])
+
+m4_ifdef([[CROSS_QEMU]], [[
+##################################################
+## "qemu-user-static" stage
+##################################################
+
+FROM ubuntu:18.04 AS qemu-user-static
+RUN export DEBIAN_FRONTEND=noninteractive \
+	&& apt-get update \
+	&& apt-get install -y --no-install-recommends qemu-user-static
+]])
+
+##################################################
+## "build-caddy" stage
+##################################################
+
+FROM golang:1-stretch AS build-caddy
+
+# Copy patches
+COPY patches/ /tmp/patches/
+
+# Build Caddy
+ARG CADDY_TREEISH=v0.11.2
+ARG LEGO_TREEISH=v2.0.1
+ARG DNSPROVIDERS_TREEISH=v0.1.3
+RUN go get -v -d github.com/mholt/caddy \
+	&& cd "${GOPATH}/src/github.com/mholt/caddy/caddy" \
+	&& git checkout "${CADDY_TREEISH}"
+RUN go get -v -d github.com/caddyserver/builds
+RUN go get -v -d github.com/xenolf/lego/lego \
+	&& cd "${GOPATH}/src/github.com/xenolf/lego/lego" \
+	&& git checkout "${LEGO_TREEISH}"
+RUN go get -v -d github.com/caddyserver/dnsproviders/... \
+	&& cd "${GOPATH}/src/github.com/caddyserver/dnsproviders" \
+	&& git checkout "${DNSPROVIDERS_TREEISH}"
+RUN cd "${GOPATH}/src/github.com/mholt/caddy/caddy" \
+	&& for f in /tmp/patches/caddy-*.patch; do [ -e "$f" ] || continue; git apply -v "$f"; done \
+	&& export GOOS=m4_ifdef([[CROSS_GOOS]], [[CROSS_GOOS]]) \
+	&& export GOARCH=m4_ifdef([[CROSS_GOARCH]], [[CROSS_GOARCH]]) \
+	&& export GOARM=m4_ifdef([[CROSS_GOARM]], [[CROSS_GOARM]]) \
+	&& go build -o ./caddy ./main.go \
+	&& mv ./caddy /usr/bin/caddy
+
+##################################################
+## "caddy" stage
+##################################################
+
+m4_ifdef([[CROSS_ARCH]], [[FROM CROSS_ARCH/ubuntu:18.04]], [[FROM ubuntu:18.04]]) AS caddy
+m4_ifdef([[CROSS_QEMU]], [[COPY --from=qemu-user-static CROSS_QEMU CROSS_QEMU]])
+
+# Create users and groups
+ARG CADDY_USER_UID=1000
+ARG CADDY_USER_GID=1000
+RUN groupadd \
+		--gid "${CADDY_USER_GID}" \
+		caddy
+RUN useradd \
+		--uid "${CADDY_USER_UID}" \
+		--gid "${CADDY_USER_GID}" \
+		--shell="$(which bash)" \
+		--home-dir /home/caddy/ \
+		--create-home \
+		caddy
+
+# Copy Caddy build
+COPY --from=build-caddy --chown=root:root /usr/bin/caddy /usr/bin/caddy
+
+# Drop root privileges
+USER caddy:caddy
+
+ENTRYPOINT ["/usr/bin/caddy"]
