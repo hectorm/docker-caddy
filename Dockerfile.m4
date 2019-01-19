@@ -49,6 +49,16 @@ RUN cd "${GOPATH}/src/github.com/mholt/caddy/caddy" \
 m4_ifdef([[CROSS_ARCH]], [[FROM CROSS_ARCH/ubuntu:18.04]], [[FROM ubuntu:18.04]]) AS caddy
 m4_ifdef([[CROSS_QEMU]], [[COPY --from=qemu-user-static CROSS_QEMU CROSS_QEMU]])
 
+# Environment
+ENV CADDYPATH=/etc/ssl/caddy
+
+# Install system packages
+RUN export DEBIAN_FRONTEND=noninteractive \
+	&& apt-get update \
+	&& apt-get install -y --no-install-recommends \
+		ca-certificates \
+		libcap2-bin
+
 # Create users and groups
 ARG CADDY_USER_UID=1000
 ARG CADDY_USER_GID=1000
@@ -66,7 +76,21 @@ RUN useradd \
 # Copy Caddy build
 COPY --from=build-caddy --chown=root:root /usr/bin/caddy /usr/bin/caddy
 
+# Add capabilities to the Caddy binary
+RUN setcap cap_net_bind_service=+ep /usr/bin/caddy
+
+# Copy Caddy config
+COPY --chown=root:root ./config/caddy/Caddyfile /etc/caddy/Caddyfile
+
+# Create web directory
+RUN mkdir /srv/www/
+RUN printf '%s\n' '<!DOCTYPE html><title>Welcome to Caddy!</title>' > /srv/www/index.html
+
+# Create $CADDYPATH directory (Caddy will use this directory to store certificates)
+RUN mkdir -p "${CADDYPATH}" && chown caddy:caddy "${CADDYPATH}" && chmod 700 "${CADDYPATH}"
+
 # Drop root privileges
 USER caddy:caddy
 
 ENTRYPOINT ["/usr/bin/caddy"]
+CMD ["-log=stdout", "-agree=true", "-conf=/etc/caddy/Caddyfile"]

@@ -1,0 +1,4 @@
+:2015 {
+    root /srv/www/
+    log / stdout
+}
