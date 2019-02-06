@@ -1,5 +1,5 @@
 diff --git a/caddy/caddymain/run.go b/caddy/caddymain/run.go
-index c0d1ba4..464dea7 100644
+index 446dc32..a723cea 100644
 --- a/caddy/caddymain/run.go
 +++ b/caddy/caddymain/run.go
 @@ -40,2 +40,32 @@ import (
