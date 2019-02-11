@@ -22,7 +22,7 @@ COPY patches/ /tmp/patches/
 
 # Build Caddy
 ARG CADDY_TREEISH=v0.11.3
-ARG LEGO_TREEISH=v2.1.0
+ARG LEGO_TREEISH=v2.2.0
 ARG DNSPROVIDERS_TREEISH=v0.1.3
 RUN go get -v -d github.com/mholt/caddy \
 	&& cd "${GOPATH}/src/github.com/mholt/caddy/caddy" \
