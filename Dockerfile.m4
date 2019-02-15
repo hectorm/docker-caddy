@@ -39,8 +39,11 @@ RUN cd "${GOPATH}/src/github.com/mholt/caddy/caddy" \
 	&& export GOOS=m4_ifdef([[CROSS_GOOS]], [[CROSS_GOOS]]) \
 	&& export GOARCH=m4_ifdef([[CROSS_GOARCH]], [[CROSS_GOARCH]]) \
 	&& export GOARM=m4_ifdef([[CROSS_GOARM]], [[CROSS_GOARM]]) \
-	&& go build -o ./caddy ./main.go \
-	&& mv ./caddy /usr/bin/caddy
+	&& export LDFLAGVARPKG='github.com/mholt/caddy/caddy/caddymain' \
+	&& export LDFLAGS="-X ${LDFLAGVARPKG}.gitTag=${CADDY_TREEISH}" \
+	&& go build -o ./caddy -ldflags "${LDFLAGS}" ./main.go \
+	&& mv ./caddy /usr/bin/caddy \
+	&& /usr/bin/caddy -version
 
 ##################################################
 ## "caddy" stage
