@@ -16,6 +16,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 ##################################################
 
 FROM golang:1-stretch AS build-caddy
+m4_ifdef([[CROSS_QEMU]], [[COPY --from=qemu-user-static CROSS_QEMU CROSS_QEMU]])
 
 # Copy patches
 COPY patches/ /tmp/patches/
