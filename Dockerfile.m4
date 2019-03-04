@@ -22,7 +22,7 @@ m4_ifdef([[CROSS_QEMU]], [[COPY --from=qemu-user-static CROSS_QEMU CROSS_QEMU]])
 COPY patches/ /tmp/patches/
 
 # Build Caddy
-ARG CADDY_TREEISH=v0.11.4
+ARG CADDY_TREEISH=v0.11.5
 ARG LEGO_TREEISH=v2.2.0
 ARG DNSPROVIDERS_TREEISH=v0.1.3
 RUN go get -v -d github.com/mholt/caddy \
