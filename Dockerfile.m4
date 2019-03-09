@@ -61,7 +61,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		ca-certificates \
-		libcap2-bin
+		libcap2-bin \
+	&& rm -rf /var/lib/apt/lists/*
 
 # Create users and groups
 ARG CADDY_USER_UID=1000
