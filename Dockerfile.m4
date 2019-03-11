@@ -22,7 +22,7 @@ m4_ifdef([[CROSS_QEMU]], [[COPY --from=qemu-user-static CROSS_QEMU CROSS_QEMU]])
 COPY patches/ /tmp/patches/
 
 # Build Caddy
-ARG LEGO_TREEISH=v2.2.0
+ARG LEGO_TREEISH=v2.3.0
 RUN go get -v -d github.com/xenolf/lego/lego \
 	&& cd "${GOPATH}/src/github.com/xenolf/lego/lego" \
 	&& git checkout "${LEGO_TREEISH}"
