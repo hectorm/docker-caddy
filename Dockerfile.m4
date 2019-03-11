@@ -22,19 +22,21 @@ m4_ifdef([[CROSS_QEMU]], [[COPY --from=qemu-user-static CROSS_QEMU CROSS_QEMU]])
 COPY patches/ /tmp/patches/
 
 # Build Caddy
-ARG CADDY_TREEISH=v0.11.5
 ARG LEGO_TREEISH=v2.2.0
+RUN go get -v -d github.com/xenolf/lego/lego \
+	&& cd "${GOPATH}/src/github.com/xenolf/lego/lego" \
+	&& git checkout "${LEGO_TREEISH}"
+
 ARG DNSPROVIDERS_TREEISH=v0.1.3
+RUN go get -v -d github.com/caddyserver/dnsproviders/... \
+	&& cd "${GOPATH}/src/github.com/caddyserver/dnsproviders" \
+	&& git checkout "${DNSPROVIDERS_TREEISH}"
+
+ARG CADDY_TREEISH=v0.11.5
 RUN go get -v -d github.com/mholt/caddy \
 	&& cd "${GOPATH}/src/github.com/mholt/caddy/caddy" \
 	&& git checkout "${CADDY_TREEISH}"
 RUN go get -v -d github.com/caddyserver/builds
-RUN go get -v -d github.com/xenolf/lego/lego \
-	&& cd "${GOPATH}/src/github.com/xenolf/lego/lego" \
-	&& git checkout "${LEGO_TREEISH}"
-RUN go get -v -d github.com/caddyserver/dnsproviders/... \
-	&& cd "${GOPATH}/src/github.com/caddyserver/dnsproviders" \
-	&& git checkout "${DNSPROVIDERS_TREEISH}"
 RUN cd "${GOPATH}/src/github.com/mholt/caddy/caddy" \
 	&& for f in /tmp/patches/caddy-*.patch; do [ -e "$f" ] || continue; git apply -v "$f"; done \
 	&& export GOOS=m4_ifdef([[CROSS_GOOS]], [[CROSS_GOOS]]) \
