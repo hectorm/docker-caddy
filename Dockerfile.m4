@@ -18,6 +18,12 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 FROM golang:1-stretch AS build-caddy
 m4_ifdef([[CROSS_QEMU]], [[COPY --from=qemu-user-static CROSS_QEMU CROSS_QEMU]])
 
+# Install system packages
+RUN export DEBIAN_FRONTEND=noninteractive \
+	&& apt-get update \
+	&& apt-get install -y --no-install-recommends \
+		file
+
 # Copy patches
 COPY patches/ /tmp/patches/
 
@@ -46,7 +52,7 @@ RUN cd "${GOPATH}/src/github.com/mholt/caddy/caddy" \
 	&& export LDFLAGS="-X ${LDFLAGVARPKG}.gitTag=${CADDY_TREEISH}" \
 	&& go build -o ./caddy -ldflags "${LDFLAGS}" ./main.go \
 	&& mv ./caddy /usr/bin/caddy \
-	&& /usr/bin/caddy -version
+	&& file /usr/bin/caddy && /usr/bin/caddy -version
 
 ##################################################
 ## "caddy" stage
