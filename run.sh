@@ -28,8 +28,8 @@ if containerExists "${DOCKER_CONTAINER}"; then
 	docker rm "${DOCKER_CONTAINER}" >/dev/null
 fi
 
-if [ -d '/srv/www/' ]; then
-	WWW_DIRECTORY=/srv/www/
+if [ -d '/var/www/html/' ]; then
+	WWW_DIRECTORY=/var/www/html/
 fi
 
 printf -- '%s\n' "Creating \"${DOCKER_CONTAINER}\" container..."
@@ -39,7 +39,7 @@ docker run --detach \
 	--restart on-failure:3 \
 	--log-opt max-size=32m \
 	--publish '2015:2015/tcp' \
-	${WWW_DIRECTORY:+--mount type=bind,src="${WWW_DIRECTORY}",dst='/srv/www/',ro} \
+	${WWW_DIRECTORY:+--mount type=bind,src="${WWW_DIRECTORY}",dst='/var/www/html/',ro} \
 	"${DOCKER_IMAGE}" "$@" >/dev/null
 
 printf -- '%s\n\n' 'Done!'

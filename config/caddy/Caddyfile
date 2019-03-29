@@ -1,4 +1,5 @@
 :2015 {
-	root /srv/www/
+	root {$CADDYWWWPATH}
 	log / stdout
+	errors stderr
 }

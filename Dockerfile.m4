@@ -63,6 +63,8 @@ m4_ifdef([[CROSS_QEMU]], [[COPY --from=qemu-user-static CROSS_QEMU CROSS_QEMU]])
 
 # Environment
 ENV CADDYPATH=/var/lib/caddy
+ENV CADDYLOGPATH=/var/log/caddy
+ENV CADDYWWWPATH=/var/www/html
 
 # Install system packages
 RUN export DEBIAN_FRONTEND=noninteractive \
@@ -95,12 +97,15 @@ RUN setcap cap_net_bind_service=+ep /usr/bin/caddy
 # Copy Caddy config
 COPY --chown=root:root ./config/caddy/Caddyfile /etc/caddy/Caddyfile
 
-# Create web directory
-RUN mkdir /srv/www/
-RUN printf '%s\n' '<!DOCTYPE html><title>Welcome to Caddy!</title>' > /srv/www/index.html
-
 # Create $CADDYPATH directory (Caddy will use this directory to store certificates)
 RUN mkdir -p "${CADDYPATH}" && chown caddy:caddy "${CADDYPATH}" && chmod 700 "${CADDYPATH}"
+
+# Create $CADDYLOGPATH directory (although this directory is not used by default)
+RUN mkdir -p "${CADDYLOGPATH}" && chown caddy:caddy "${CADDYLOGPATH}" && chmod 700 "${CADDYLOGPATH}"
+
+# Create $CADDYWWWPATH directory (explicitly change owner to root, even if it is not necessary)
+RUN mkdir -p "${CADDYWWWPATH}" && chown root:root "${CADDYWWWPATH}" && chmod 755 "${CADDYWWWPATH}"
+RUN printf '%s\n' '<!DOCTYPE html><title>Welcome to Caddy!</title>' > "${CADDYWWWPATH}"/index.html
 
 # Drop root privileges
 USER caddy:caddy
