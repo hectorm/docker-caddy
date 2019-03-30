@@ -22,7 +22,9 @@ m4_ifdef([[CROSS_QEMU]], [[COPY --from=qemu-user-static CROSS_QEMU CROSS_QEMU]])
 RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends \
-		file
+		file \
+		tzdata \
+	&& rm -rf /var/lib/apt/lists/*
 
 # Copy patches
 COPY patches/ /tmp/patches/
@@ -72,6 +74,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get install -y --no-install-recommends \
 		ca-certificates \
 		libcap2-bin \
+		tzdata \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Create users and groups
