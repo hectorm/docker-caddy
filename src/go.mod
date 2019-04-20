@@ -1,0 +1,76 @@
+module caddy
+
+require (
+	github.com/mholt/caddy v1.0.0-beta2
+	github.com/caddyserver/dnsproviders master
+
+	// Lego dependencies:
+	github.com/go-acme/lego v2.5.0
+	cloud.google.com/go v0.26.0
+	github.com/Azure/azure-sdk-for-go v19.1.0+incompatible
+	github.com/Azure/go-autorest v10.15.2+incompatible
+	github.com/BurntSushi/toml v0.3.1
+	github.com/JamesClonk/vultr v0.0.0-20180101102256-fa1c0367800d
+	github.com/OpenDNS/vegadns2client v0.0.0-20180418235048-a3fa4a771d87
+	github.com/akamai/AkamaiOPEN-edgegrid-golang v0.7.3
+	github.com/aliyun/alibaba-cloud-sdk-go v0.0.0-20180828111155-cad214d7d71f
+	github.com/aws/aws-sdk-go v1.15.23
+	github.com/cenkalti/backoff v2.1.1+incompatible
+	github.com/cloudflare/cloudflare-go v0.8.5
+	github.com/cpu/goacmedns v0.0.0-20180701200144-565ecf2a84df
+	github.com/davecgh/go-spew v1.1.1
+	github.com/decker502/dnspod-go v0.0.0-20180416134550-83a3ba562b04
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/dimchansky/utfbom v1.0.0
+	github.com/dnsimple/dnsimple-go v0.21.0
+	github.com/exoscale/egoscale v0.14.0
+	github.com/fatih/structs v1.1.0
+	github.com/go-ini/ini v1.38.2
+	github.com/go-resty/resty v1.8.0
+	github.com/golang/protobuf v1.2.0
+	github.com/google/go-querystring v0.0.0-20170111101155-53e6ce116135
+	github.com/google/uuid v0.0.0-20161128191214-064e2069ce9c
+	github.com/gophercloud/gophercloud v0.0.0-20190204021847-a2b0ad6ce68c
+	github.com/hashicorp/golang-lru v0.5.1
+	github.com/iij/doapi v0.0.0-20180911005243-8803795a9b7b
+	github.com/jmespath/go-jmespath v0.0.0-20160202185014-0b12d6b521d8
+	github.com/json-iterator/go v1.1.5
+	github.com/juju/ratelimit v1.0.1
+	github.com/kolo/xmlrpc v0.0.0-20181023172212-16bdd962781d
+	github.com/linode/linodego v0.5.1
+	github.com/miekg/dns v1.1.0
+	github.com/mitchellh/go-homedir v1.0.0
+	github.com/mitchellh/mapstructure v1.1.2
+	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd
+	github.com/modern-go/reflect2 v0.0.0-20180701023420-4b7aa43c6742
+	github.com/namedotcom/go v0.0.0-20180403034216-08470befbe04
+	github.com/nrdcg/auroradns v1.0.0
+	github.com/nrdcg/goinwx v0.6.0
+	github.com/oracle/oci-go-sdk v4.0.0+incompatible
+	github.com/ovh/go-ovh v0.0.0-20180717143715-c3e61035ea66
+	github.com/pkg/errors v0.8.0
+	github.com/pmezard/go-difflib v1.0.0
+	github.com/rainycape/memcache v0.0.0-20150622160815-1031fa0ce2f2
+	github.com/sacloud/libsacloud v1.19.0
+	github.com/satori/go.uuid v1.2.0
+	github.com/sirupsen/logrus v1.0.6
+	github.com/stretchr/objx v0.1.1
+	github.com/stretchr/testify v1.2.2
+	github.com/timewasted/linode v0.0.0-20160829202747-37e84520dcf7
+	github.com/transip/gotransip v5.8.1+incompatible
+	github.com/urfave/cli v1.20.0
+	go.opencensus.io v0.20.1
+	golang.org/x/crypto v0.0.0-20180820150726-614d502a4dac
+	golang.org/x/net v0.0.0-20180826012351-8a410e7b638d
+	golang.org/x/oauth2 v0.0.0-20180821212333-d2e6202438be
+	golang.org/x/sys v0.0.0-20180828065106-d99a578cf41b
+	golang.org/x/text v0.3.0
+	golang.org/x/time v0.0.0-20180412165947-fbb02b2291d2
+	google.golang.org/api v0.3.2
+	google.golang.org/appengine v1.1.0
+	google.golang.org/genproto v0.0.0-20190404172233-64821d5d2107
+	google.golang.org/grpc v1.19.1
+	gopkg.in/ini.v1 v1.38.2
+	gopkg.in/ns1/ns1-go.v2 v2.0.0-20180828122412-028658c6d9be
+	gopkg.in/square/go-jose.v2 v2.1.9
+)

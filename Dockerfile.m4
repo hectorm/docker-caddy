@@ -18,6 +18,10 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 FROM golang:1-stretch AS build-caddy
 m4_ifdef([[CROSS_QEMU]], [[COPY --from=qemu-user-static CROSS_QEMU CROSS_QEMU]])
 
+# Environment
+ENV GO111MODULE=on
+ENV CGO_ENABLED=0
+
 # Install system packages
 RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get update \
@@ -26,35 +30,16 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		tzdata \
 	&& rm -rf /var/lib/apt/lists/*
 
-# Copy patches
-COPY patches/ /tmp/patches/
-
 # Build Caddy
-ARG LEGO_TREEISH=v2.3.0
-RUN go get -v -d github.com/xenolf/lego/lego \
-	&& cd "${GOPATH}/src/github.com/xenolf/lego/lego" \
-	&& git checkout "${LEGO_TREEISH}"
-
-ARG DNSPROVIDERS_TREEISH=v0.1.3
-RUN go get -v -d github.com/caddyserver/dnsproviders/... \
-	&& cd "${GOPATH}/src/github.com/caddyserver/dnsproviders" \
-	&& git checkout "${DNSPROVIDERS_TREEISH}"
-
-ARG CADDY_TREEISH=v0.11.5
-RUN go get -v -d github.com/mholt/caddy \
-	&& cd "${GOPATH}/src/github.com/mholt/caddy/caddy" \
-	&& git checkout "${CADDY_TREEISH}"
-RUN go get -v -d github.com/caddyserver/builds
-RUN cd "${GOPATH}/src/github.com/mholt/caddy/caddy" \
-	&& for f in /tmp/patches/caddy-*.patch; do [ -e "$f" ] || continue; git apply -v "$f"; done \
+COPY ./src/ /go/src/caddy/
+RUN cd /go/src/caddy/ \
 	&& export GOOS=m4_ifdef([[CROSS_GOOS]], [[CROSS_GOOS]]) \
 	&& export GOARCH=m4_ifdef([[CROSS_GOARCH]], [[CROSS_GOARCH]]) \
 	&& export GOARM=m4_ifdef([[CROSS_GOARM]], [[CROSS_GOARM]]) \
-	&& export LDFLAGVARPKG='github.com/mholt/caddy/caddy/caddymain' \
-	&& export LDFLAGS="-X ${LDFLAGVARPKG}.gitTag=${CADDY_TREEISH}" \
-	&& go build -o ./caddy -ldflags "${LDFLAGS}" ./main.go \
+	&& go build -o ./caddy -ldflags '-s -w' ./main.go \
 	&& mv ./caddy /usr/bin/caddy \
-	&& file /usr/bin/caddy && /usr/bin/caddy -version
+	&& file /usr/bin/caddy \
+	&& /usr/bin/caddy -version
 
 ##################################################
 ## "caddy" stage
@@ -94,11 +79,12 @@ RUN useradd \
 # Copy Caddy build
 COPY --from=build-caddy --chown=root:root /usr/bin/caddy /usr/bin/caddy
 
-# Add capabilities to the Caddy binary
-RUN setcap cap_net_bind_service=+ep /usr/bin/caddy
-
 # Copy Caddy config
 COPY --chown=root:root ./config/caddy/Caddyfile /etc/caddy/Caddyfile
+
+# Add capabilities to the Caddy binary (this allows Caddy to bind to privileged ports
+# without being root, but creates another layer that increases the image size)
+RUN setcap cap_net_bind_service=+ep /usr/bin/caddy
 
 # Create $CADDYPATH directory (Caddy will use this directory to store certificates)
 RUN mkdir -p "${CADDYPATH}" && chown caddy:caddy "${CADDYPATH}" && chmod 700 "${CADDYPATH}"
@@ -108,7 +94,8 @@ RUN mkdir -p "${CADDYLOGPATH}" && chown caddy:caddy "${CADDYLOGPATH}" && chmod 7
 
 # Create $CADDYWWWPATH directory (explicitly change owner to root, even if it is not necessary)
 RUN mkdir -p "${CADDYWWWPATH}" && chown root:root "${CADDYWWWPATH}" && chmod 755 "${CADDYWWWPATH}"
-RUN printf '%s\n' '<!DOCTYPE html><title>Welcome to Caddy!</title>' > "${CADDYWWWPATH}"/index.html
+RUN HTML_FORMAT='<!DOCTYPE html><title>%s</title><h1>%s</h1>\n'; WELCOME_ARG='Welcome to Caddy!'; \
+	printf "${HTML_FORMAT}" "${WELCOME_ARG}" "${WELCOME_ARG}" > "${CADDYWWWPATH}"/index.html
 
 # Drop root privileges
 USER caddy:caddy
