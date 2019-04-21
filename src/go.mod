@@ -1,8 +1,8 @@
 module caddy
 
 require (
-	github.com/mholt/caddy v1.0.0-beta2
-	github.com/caddyserver/dnsproviders master
+	github.com/mholt/caddy v1.0.0-beta2.0.20190420233410-0c3d90ed21a4
+	github.com/caddyserver/dnsproviders v0.1.4
 
 	// Lego dependencies:
 	github.com/go-acme/lego v2.5.0
