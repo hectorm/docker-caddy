@@ -21,6 +21,9 @@ m4_ifdef([[CROSS_QEMU]], [[COPY --from=qemu-user-static CROSS_QEMU CROSS_QEMU]])
 # Environment
 ENV GO111MODULE=on
 ENV CGO_ENABLED=0
+ENV GOOS=m4_ifdef([[CROSS_GOOS]], [[CROSS_GOOS]])
+ENV GOARCH=m4_ifdef([[CROSS_GOARCH]], [[CROSS_GOARCH]])
+ENV GOARM=m4_ifdef([[CROSS_GOARM]], [[CROSS_GOARM]])
 
 # Install system packages
 RUN export DEBIAN_FRONTEND=noninteractive \
@@ -32,14 +35,12 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 # Build Caddy
 COPY ./src/ /go/src/caddy/
-RUN cd /go/src/caddy/ \
-	&& export GOOS=m4_ifdef([[CROSS_GOOS]], [[CROSS_GOOS]]) \
-	&& export GOARCH=m4_ifdef([[CROSS_GOARCH]], [[CROSS_GOARCH]]) \
-	&& export GOARM=m4_ifdef([[CROSS_GOARM]], [[CROSS_GOARM]]) \
-	&& go build -o ./caddy -ldflags '-s -w' ./main.go \
-	&& mv ./caddy /usr/bin/caddy \
-	&& file /usr/bin/caddy \
-	&& /usr/bin/caddy -version
+WORKDIR /go/src/caddy/
+RUN go mod download
+RUN go build -v -o ./caddy -ldflags '-s -w' ./main.go
+RUN mv ./caddy /usr/bin/caddy
+RUN file /usr/bin/caddy
+RUN /usr/bin/caddy -version
 
 ##################################################
 ## "caddy" stage
