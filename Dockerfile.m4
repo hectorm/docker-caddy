@@ -4,8 +4,8 @@ m4_changequote([[, ]])
 ## "build-caddy" stage
 ##################################################
 
-FROM golang:1-stretch AS build-caddy
-m4_ifdef([[CROSS_QEMU]], [[COPY --from=hectormolinero/qemu-user-static:latest CROSS_QEMU CROSS_QEMU]])
+FROM docker.io/golang:1-stretch AS build-caddy
+m4_ifdef([[CROSS_QEMU]], [[COPY --from=docker.io/hectormolinero/qemu-user-static:latest CROSS_QEMU CROSS_QEMU]])
 
 # Environment
 ENV GO111MODULE=on
@@ -35,8 +35,8 @@ RUN /usr/bin/caddy -version
 ## "caddy" stage
 ##################################################
 
-m4_ifdef([[CROSS_ARCH]], [[FROM CROSS_ARCH/ubuntu:18.04]], [[FROM ubuntu:18.04]]) AS caddy
-m4_ifdef([[CROSS_QEMU]], [[COPY --from=hectormolinero/qemu-user-static:latest CROSS_QEMU CROSS_QEMU]])
+m4_ifdef([[CROSS_ARCH]], [[FROM docker.io/CROSS_ARCH/ubuntu:18.04]], [[FROM docker.io/ubuntu:18.04]]) AS caddy
+m4_ifdef([[CROSS_QEMU]], [[COPY --from=docker.io/hectormolinero/qemu-user-static:latest CROSS_QEMU CROSS_QEMU]])
 
 # Environment
 ENV CADDYPATH=/var/lib/caddy
