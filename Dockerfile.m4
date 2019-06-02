@@ -61,7 +61,7 @@ RUN groupadd \
 RUN useradd \
 		--uid "${CADDY_USER_UID}" \
 		--gid "${CADDY_USER_GID}" \
-		--shell "$(which bash)" \
+		--shell "$(command -v bash)" \
 		--home-dir /home/caddy/ \
 		--create-home \
 		caddy
