@@ -1,7 +1,9 @@
 package main
 
 import (
-	"github.com/mholt/caddy/caddy/caddymain"
+	"github.com/caddyserver/caddy/caddy/caddymain"
+	_ "github.com/caddyserver/dnsproviders/acmedns"
+	_ "github.com/caddyserver/dnsproviders/alidns"
 	_ "github.com/caddyserver/dnsproviders/auroradns"
 	_ "github.com/caddyserver/dnsproviders/azure"
 	_ "github.com/caddyserver/dnsproviders/cloudflare"
@@ -21,8 +23,11 @@ import (
 	_ "github.com/caddyserver/dnsproviders/glesys"
 	_ "github.com/caddyserver/dnsproviders/godaddy"
 	_ "github.com/caddyserver/dnsproviders/googlecloud"
+	_ "github.com/caddyserver/dnsproviders/httpreq"
+	_ "github.com/caddyserver/dnsproviders/inwx"
 	_ "github.com/caddyserver/dnsproviders/lightsail"
 	_ "github.com/caddyserver/dnsproviders/linode"
+	_ "github.com/caddyserver/dnsproviders/linodev4"
 	_ "github.com/caddyserver/dnsproviders/namecheap"
 	_ "github.com/caddyserver/dnsproviders/namedotcom"
 	_ "github.com/caddyserver/dnsproviders/nifcloud"
@@ -35,6 +40,7 @@ import (
 	_ "github.com/caddyserver/dnsproviders/route53"
 	_ "github.com/caddyserver/dnsproviders/selectel"
 	_ "github.com/caddyserver/dnsproviders/stackpath"
+	_ "github.com/caddyserver/dnsproviders/transip"
 	_ "github.com/caddyserver/dnsproviders/vscale"
 	_ "github.com/caddyserver/dnsproviders/vultr"
 )
