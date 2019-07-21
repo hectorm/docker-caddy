@@ -30,6 +30,7 @@ import (
 	_ "github.com/caddyserver/dnsproviders/linodev4"
 	_ "github.com/caddyserver/dnsproviders/namecheap"
 	_ "github.com/caddyserver/dnsproviders/namedotcom"
+	_ "github.com/caddyserver/dnsproviders/namesilo"
 	_ "github.com/caddyserver/dnsproviders/nifcloud"
 	_ "github.com/caddyserver/dnsproviders/ns1"
 	_ "github.com/caddyserver/dnsproviders/otc"
