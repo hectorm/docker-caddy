@@ -19,6 +19,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		file \
+		mime-support \
 		tzdata \
 	&& rm -rf /var/lib/apt/lists/*
 
@@ -49,6 +50,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get install -y --no-install-recommends \
 		ca-certificates \
 		libcap2-bin \
+		mime-support \
 		tzdata \
 	&& rm -rf /var/lib/apt/lists/*
 
