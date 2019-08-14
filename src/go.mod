@@ -1,7 +1,7 @@
 module caddy
 
 require (
-	github.com/caddyserver/caddy v1.0.1
+	github.com/caddyserver/caddy v1.0.3
 	github.com/caddyserver/dnsproviders v0.3.0
 	github.com/go-acme/lego v2.7.1
 	// Explicitly define lego dependencies until the project migrates to Go modules.
