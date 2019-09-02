@@ -58,11 +58,11 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 ARG CADDY_USER_UID=1000
 ARG CADDY_USER_GID=1000
 RUN groupadd \
-		--gid "${CADDY_USER_GID}" \
+		--gid "${CADDY_USER_GID:?}" \
 		caddy
 RUN useradd \
-		--uid "${CADDY_USER_UID}" \
-		--gid "${CADDY_USER_GID}" \
+		--uid "${CADDY_USER_UID:?}" \
+		--gid "${CADDY_USER_GID:?}" \
 		--shell "$(command -v bash)" \
 		--home-dir /home/caddy/ \
 		--create-home \
@@ -79,15 +79,15 @@ COPY --chown=root:root ./config/caddy/Caddyfile /etc/caddy/Caddyfile
 RUN setcap cap_net_bind_service=+ep /usr/bin/caddy
 
 # Create $CADDYPATH directory (Caddy will use this directory to store certificates)
-RUN mkdir -p "${CADDYPATH}" && chown caddy:caddy "${CADDYPATH}" && chmod 700 "${CADDYPATH}"
+RUN mkdir -p "${CADDYPATH:?}" && chown caddy:caddy "${CADDYPATH:?}" && chmod 700 "${CADDYPATH:?}"
 
 # Create $CADDYLOGPATH directory (although this directory is not used by default)
-RUN mkdir -p "${CADDYLOGPATH}" && chown caddy:caddy "${CADDYLOGPATH}" && chmod 700 "${CADDYLOGPATH}"
+RUN mkdir -p "${CADDYLOGPATH:?}" && chown caddy:caddy "${CADDYLOGPATH:?}" && chmod 700 "${CADDYLOGPATH:?}"
 
 # Create $CADDYWWWPATH directory (explicitly change owner to root, even if it is not necessary)
-RUN mkdir -p "${CADDYWWWPATH}" && chown root:root "${CADDYWWWPATH}" && chmod 755 "${CADDYWWWPATH}"
+RUN mkdir -p "${CADDYWWWPATH:?}" && chown root:root "${CADDYWWWPATH:?}" && chmod 755 "${CADDYWWWPATH:?}"
 RUN HTML_FORMAT='<!DOCTYPE html><title>%s</title><h1>%s</h1>\n'; WELCOME_ARG='Welcome to Caddy!'; \
-	printf "${HTML_FORMAT}" "${WELCOME_ARG}" "${WELCOME_ARG}" > "${CADDYWWWPATH}"/index.html
+	printf "${HTML_FORMAT:?}" "${WELCOME_ARG:?}" "${WELCOME_ARG:?}" > "${CADDYWWWPATH:?}"/index.html
 
 # Drop root privileges
 USER caddy:caddy
