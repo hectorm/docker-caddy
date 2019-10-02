@@ -1,0 +1,4 @@
+http://*:2015 {
+	root * {$CADDYWWWPATH}
+	file_server * browse
+}
