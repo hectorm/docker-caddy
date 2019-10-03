@@ -1,5 +1,7 @@
-:2015 {
+http://*:2015 {
 	root {$CADDYWWWPATH}
+	browse /
+
 	log / stdout
 	errors stderr
 }
