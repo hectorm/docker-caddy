@@ -4,6 +4,8 @@ import (
 	caddycmd "github.com/caddyserver/caddy/v2/cmd"
 	// This is where modules get plugged in:
 	_ "github.com/caddyserver/caddy/v2/caddyconfig/caddyfile"
+	_ "github.com/caddyserver/caddy/v2/caddyconfig/json5"
+	_ "github.com/caddyserver/caddy/v2/caddyconfig/jsonc"
 	_ "github.com/caddyserver/caddy/v2/modules/caddyhttp"
 	_ "github.com/caddyserver/caddy/v2/modules/caddyhttp/encode"
 	_ "github.com/caddyserver/caddy/v2/modules/caddyhttp/encode/brotli"
