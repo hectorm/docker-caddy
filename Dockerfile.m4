@@ -77,6 +77,7 @@ COPY --chown=root:root ./config/caddy/Caddyfile /etc/caddy/Caddyfile
 
 # Add capabilities to the Caddy binary (this allows Caddy to bind to privileged ports
 # without being root, but creates another layer that increases the image size)
+m4_ifdef([[CROSS_QEMU]], [[RUN setcap cap_net_bind_service=+ep CROSS_QEMU]])
 RUN setcap cap_net_bind_service=+ep /usr/bin/caddy
 
 # Create $CADDYPATH directory (Caddy will use this directory to store certificates)
