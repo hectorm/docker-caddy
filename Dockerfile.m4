@@ -1,10 +1,10 @@
 m4_changequote([[, ]])
 
 ##################################################
-## "build-caddy" stage
+## "build" stage
 ##################################################
 
-FROM docker.io/golang:1-stretch AS build-caddy
+FROM docker.io/golang:1-stretch AS build
 m4_ifdef([[CROSS_QEMU]], [[COPY --from=docker.io/hectormolinero/qemu-user-static:latest CROSS_QEMU CROSS_QEMU]])
 
 # Environment
@@ -20,8 +20,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get install -y --no-install-recommends \
 		file \
 		mime-support \
-		tzdata \
-	&& rm -rf /var/lib/apt/lists/*
+		tzdata
 
 # Build Caddy
 COPY ./src/ /go/src/caddy/
@@ -70,7 +69,7 @@ RUN useradd \
 		caddy
 
 # Copy Caddy build
-COPY --from=build-caddy --chown=root:root /usr/bin/caddy /usr/bin/caddy
+COPY --from=build --chown=root:root /usr/bin/caddy /usr/bin/caddy
 
 # Copy Caddy config
 COPY --chown=root:root ./config/caddy/Caddyfile /etc/caddy/Caddyfile
