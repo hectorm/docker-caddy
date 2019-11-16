@@ -93,4 +93,4 @@ RUN HTML_FORMAT='<!DOCTYPE html><title>%s</title><h1>%s</h1>\n'; WELCOME_ARG='We
 USER caddy:caddy
 
 ENTRYPOINT ["/usr/bin/caddy"]
-CMD ["-log=stdout", "-log-timestamps=false", "-agree=true", "-conf=/etc/caddy/Caddyfile"]
+CMD ["-log=stdout", "-log-timestamps=false", "-agree=true", "-conf=/etc/caddy/Caddyfile", "-root=/var/www/html"]
