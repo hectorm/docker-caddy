@@ -23,7 +23,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		tzdata
 
 # Build Caddy
-COPY ./src/ /go/src/caddy/
+COPY --chown=root:root ./src/ /go/src/caddy/
 WORKDIR /go/src/caddy/
 RUN go mod download
 RUN go build -v -o ./caddy -ldflags '-s -w' ./main.go
