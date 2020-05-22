@@ -21,6 +21,8 @@ ifneq ($(wildcard $(VERSION_FILE)),)
 	IMAGE_VERSION := $(shell cat '$(VERSION_FILE)')
 endif
 
+IMAGE_BUILD_OPTS :=
+
 IMAGE_NATIVE_DOCKERFILE := $(DISTDIR)/Dockerfile
 IMAGE_NATIVE_TARBALL := $(DISTDIR)/$(IMAGE_PROJECT).txz
 
@@ -52,7 +54,7 @@ $(IMAGE_NATIVE_DOCKERFILE): $(DOCKERFILE_TEMPLATE)
 	'$(M4)' \
 		--prefix-builtins \
 		'$(DOCKERFILE_TEMPLATE)' | cat --squeeze-blank > '$@'
-	'$(DOCKER)' build \
+	'$(DOCKER)' build $(IMAGE_BUILD_OPTS) \
 		--tag '$(IMAGE_NAME):$(IMAGE_VERSION)' \
 		--tag '$(IMAGE_NAME):latest' \
 		--file '$@' ./
@@ -71,7 +73,7 @@ $(IMAGE_AMD64_DOCKERFILE): $(DOCKERFILE_TEMPLATE)
 		-D CROSS_QEMU=/usr/bin/qemu-x86_64-static \
 		-D CROSS_GOOS=linux -D CROSS_GOARCH=amd64 \
 		'$(DOCKERFILE_TEMPLATE)' | cat --squeeze-blank > '$@'
-	'$(DOCKER)' build \
+	'$(DOCKER)' build $(IMAGE_BUILD_OPTS) \
 		--tag '$(IMAGE_NAME):$(IMAGE_VERSION)-amd64' \
 		--tag '$(IMAGE_NAME):latest-amd64' \
 		--file '$@' ./
@@ -87,7 +89,7 @@ $(IMAGE_ARM64V8_DOCKERFILE): $(DOCKERFILE_TEMPLATE)
 		-D CROSS_QEMU=/usr/bin/qemu-aarch64-static \
 		-D CROSS_GOOS=linux -D CROSS_GOARCH=arm64 \
 		'$(DOCKERFILE_TEMPLATE)' | cat --squeeze-blank > '$@'
-	'$(DOCKER)' build \
+	'$(DOCKER)' build $(IMAGE_BUILD_OPTS) \
 		--tag '$(IMAGE_NAME):$(IMAGE_VERSION)-arm64v8' \
 		--tag '$(IMAGE_NAME):latest-arm64v8' \
 		--file '$@' ./
@@ -103,7 +105,7 @@ $(IMAGE_ARM32V7_DOCKERFILE): $(DOCKERFILE_TEMPLATE)
 		-D CROSS_QEMU=/usr/bin/qemu-arm-static \
 		-D CROSS_GOOS=linux -D CROSS_GOARCH=arm -D CROSS_GOARM=7 \
 		'$(DOCKERFILE_TEMPLATE)' | cat --squeeze-blank > '$@'
-	'$(DOCKER)' build \
+	'$(DOCKER)' build $(IMAGE_BUILD_OPTS) \
 		--tag '$(IMAGE_NAME):$(IMAGE_VERSION)-arm32v7' \
 		--tag '$(IMAGE_NAME):latest-arm32v7' \
 		--file '$@' ./
