@@ -63,8 +63,8 @@ RUN useradd \
 		--uid "${CADDY_USER_UID:?}" \
 		--gid "${CADDY_USER_GID:?}" \
 		--shell "$(command -v bash)" \
-		--home-dir /home/caddy/ \
-		--create-home \
+		--home-dir "${CADDYPATH:?}" \
+		--no-create-home \
 		caddy
 
 # Copy Caddy build
