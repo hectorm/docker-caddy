@@ -1,15 +1,17 @@
-# Caddy
+# Caddy on Docker
 
-A [Docker](https://docker.com) image for [Caddy](https://caddyserver.com/) without telemetry and with [all DNS providers](https://github.com/caddyserver/dnsproviders) included.
+A Docker image for [Caddy](https://caddyserver.com/v1/) without telemetry and with [all DNS providers](https://github.com/caddyserver/dnsproviders) included.
 
 ## Examples
 
-### Serve current directory
+### Serve the current directory
+
 ```sh
 docker run --rm -it -v "$PWD":/var/www/html/:ro -p 2015:2015 hectormolinero/caddy:latest
 ```
 
-### Serve `/var/www/html/` and use `/etc/caddy/Caddyfile` as config
+### Serve `/var/www/html/` directory and use `/etc/caddy/Caddyfile` file as config
+
 ```sh
 docker run --rm -it -v /etc/caddy/Caddyfile:/etc/caddy/Caddyfile:ro -v /var/www/html/:/var/www/html/:ro -p 2015:2015 hectormolinero/caddy:latest
 ```
