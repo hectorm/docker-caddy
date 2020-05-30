@@ -33,10 +33,10 @@ RUN /usr/bin/caddy version
 RUN /usr/bin/caddy list-modules --versions
 
 ##################################################
-## "caddy" stage
+## "base" stage
 ##################################################
 
-m4_ifdef([[CROSS_ARCH]], [[FROM docker.io/CROSS_ARCH/ubuntu:18.04]], [[FROM docker.io/ubuntu:18.04]]) AS caddy
+m4_ifdef([[CROSS_ARCH]], [[FROM docker.io/CROSS_ARCH/ubuntu:18.04]], [[FROM docker.io/ubuntu:18.04]]) AS base
 m4_ifdef([[CROSS_QEMU]], [[COPY --from=docker.io/hectormolinero/qemu-user-static:latest CROSS_QEMU CROSS_QEMU]])
 
 # Environment
@@ -92,6 +92,20 @@ RUN HTML_FORMAT='<!DOCTYPE html><title>%s</title><h1>%s</h1>\n'; WELCOME_ARG='We
 
 # Drop root privileges
 USER caddy:caddy
+
+##################################################
+## "test" stage
+##################################################
+
+FROM base AS test
+
+RUN caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
+
+##################################################
+## "caddy" stage
+##################################################
+
+FROM base AS caddy
 
 ENTRYPOINT ["/usr/bin/caddy"]
 CMD ["run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
