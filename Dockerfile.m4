@@ -32,10 +32,10 @@ RUN file /usr/bin/caddy
 RUN /usr/bin/caddy -version
 
 ##################################################
-## "caddy" stage
+## "base" stage
 ##################################################
 
-m4_ifdef([[CROSS_ARCH]], [[FROM docker.io/CROSS_ARCH/ubuntu:18.04]], [[FROM docker.io/ubuntu:18.04]]) AS caddy
+m4_ifdef([[CROSS_ARCH]], [[FROM docker.io/CROSS_ARCH/ubuntu:18.04]], [[FROM docker.io/ubuntu:18.04]]) AS base
 m4_ifdef([[CROSS_QEMU]], [[COPY --from=docker.io/hectormolinero/qemu-user-static:latest CROSS_QEMU CROSS_QEMU]])
 
 # Environment
@@ -92,5 +92,19 @@ RUN HTML_FORMAT='<!DOCTYPE html><title>%s</title><h1>%s</h1>\n'; WELCOME_ARG='We
 # Drop root privileges
 USER caddy:caddy
 
+##################################################
+## "test" stage
+##################################################
+
+FROM base AS test
+
+RUN caddy -validate -conf /etc/caddy/Caddyfile
+
+##################################################
+## "caddy" stage
+##################################################
+
+FROM base AS caddy
+
 ENTRYPOINT ["/usr/bin/caddy"]
-CMD ["-log=stdout", "-log-timestamps=false", "-agree=true", "-conf=/etc/caddy/Caddyfile", "-root=/var/www/html"]
+CMD ["-conf=/etc/caddy/Caddyfile", "-root=/var/www/html", "-log=stdout", "-log-timestamps=false", "-agree=true"]
