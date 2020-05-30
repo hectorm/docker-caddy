@@ -1,4 +1,9 @@
 :2015 {
 	root * {$CADDYWWWPATH}
 	file_server * browse
+
+	log {
+		output stdout
+		format single_field common_log
+	}
 }
