@@ -1,8 +1,7 @@
 module caddy
 
 require (
-	github.com/caddyserver/caddy/v2 v2.1.1
-	github.com/caddy-dns/cloudflare 5223567e8690d170771ab232c630c0517c5706b6
-	github.com/caddy-dns/lego-deprecated 8284378873307e09c1bb5d4b8cacc46762cdfefe
-	github.com/lucas-clemente/quic-go v0.18.0
+	github.com/caddyserver/caddy/v2 v2.2.0
+	github.com/caddy-dns/cloudflare 4494da72fa56c211676fe72d295e89bc196e954a
+	github.com/caddy-dns/lego-deprecated 7380877bc825bf5348496a5b359a35fca1a963ce
 )
