@@ -72,7 +72,7 @@ RUN useradd \
 COPY --from=build --chown=root:root /usr/bin/caddy /usr/bin/caddy
 
 # Copy Caddy config
-COPY --chown=root:root ./config/caddy/Caddyfile /etc/caddy/Caddyfile
+COPY --chown=root:root ./config/caddy/ /etc/caddy/
 
 # Add capabilities to the Caddy binary (this allows Caddy to bind to privileged ports
 # without being root, but creates another layer that increases the image size)
@@ -100,6 +100,7 @@ USER caddy:caddy
 FROM base AS test
 
 RUN caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
+RUN caddy validate --config /etc/caddy/Caddyfile.json
 
 ##################################################
 ## "caddy" stage
