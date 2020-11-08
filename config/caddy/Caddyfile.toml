@@ -1,0 +1,33 @@
+[logging]
+
+  [logging.logs.default]
+    exclude = ['http.log.access.log0']
+
+  [logging.logs.log0]
+    include = ['http.log.access.log0']
+
+    [logging.logs.log0.writer]
+      output = 'stdout'
+
+    [logging.logs.log0.encoder]
+      format = 'single_field'
+      field = 'common_log'
+
+[apps]
+
+  [apps.http.servers.srv0]
+    listen = [':2015']
+
+    [[apps.http.servers.srv0.routes]]
+
+      [[apps.http.servers.srv0.routes.handle]]
+        handler = 'vars'
+        root = '{env.CADDYWWWPATH}'
+
+      [[apps.http.servers.srv0.routes.handle]]
+        handler = 'file_server'
+
+        [apps.http.servers.srv0.routes.handle.browse]
+
+    [apps.http.servers.srv0.logs]
+      default_logger_name = 'log0'

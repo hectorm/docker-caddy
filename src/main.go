@@ -7,6 +7,7 @@ import (
 	_ "github.com/caddy-dns/cloudflare"
 	_ "github.com/caddy-dns/lego-deprecated"
 	_ "github.com/mholt/caddy-l4"
+	_ "caddy/modules/tomladapter"
 )
 
 func main() {
