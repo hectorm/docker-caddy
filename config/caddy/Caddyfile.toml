@@ -22,7 +22,7 @@
 
       [[apps.http.servers.srv0.routes.handle]]
         handler = 'vars'
-        root = '{env.CADDYWWWPATH}'
+        root = '{$CADDYWWWPATH}'
 
       [[apps.http.servers.srv0.routes.handle]]
         handler = 'file_server'

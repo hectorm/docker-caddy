@@ -5,7 +5,7 @@ logging: logs: {
     writer: output: "stdout"
     encoder: {
       format: "single_field"
-      field:  "common_log"
+      field: "common_log"
     }
   }
 }
@@ -15,7 +15,7 @@ apps: http: servers: srv0: {
   routes: [{
     handle: [{
       handler: "vars"
-      root:    "{env.CADDYWWWPATH}"
+      root: "{$CADDYWWWPATH}"
     }, {
       handler: "file_server"
       browse: {}
