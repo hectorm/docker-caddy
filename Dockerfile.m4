@@ -100,6 +100,7 @@ USER caddy:caddy
 FROM base AS test
 
 RUN caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
+RUN caddy validate --config /etc/caddy/Caddyfile.cue --adapter cue
 RUN caddy validate --config /etc/caddy/Caddyfile.toml --adapter toml
 RUN caddy validate --config /etc/caddy/Caddyfile.json
 
