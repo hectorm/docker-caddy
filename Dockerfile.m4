@@ -26,6 +26,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 COPY --chown=root:root ./src/ /go/src/caddy/
 WORKDIR /go/src/caddy/
 RUN go mod download
+RUN go test -v -short github.com/caddyserver/...
 RUN go build -v -o ./caddy -ldflags '-s -w' ./main.go
 RUN mv ./caddy /usr/bin/caddy
 RUN file /usr/bin/caddy
