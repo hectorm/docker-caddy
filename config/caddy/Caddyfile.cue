@@ -4,8 +4,8 @@ logging: logs: {
     include: ["http.log.access.log0"]
     writer: output: "stdout"
     encoder: {
-      format: "single_field"
-      field: "common_log"
+      format: "formatted"
+      template: #"{common_log} "{request>headers>Referer>[0]}" "{request>headers>User-Agent>[0]}""#
     }
   }
 }
