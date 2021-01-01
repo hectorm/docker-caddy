@@ -1,7 +1,7 @@
 module caddy
 
 require (
-	github.com/caddyserver/caddy/v2 v2.2.1
+	github.com/caddyserver/caddy/v2 v2.3.0
 
 	github.com/caddyserver/format-encoder c10acf81b981c019a671516671f0f556efb0a73e
 	github.com/mholt/caddy-l4 4689395265dee71a3222ea2347862485fac04cfb
