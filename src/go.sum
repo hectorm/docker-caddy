@@ -117,7 +117,6 @@ github.com/boombuler/barcode v1.0.1-0.20190219062509-6c824513bacc/go.mod h1:paBW
 github.com/bradfitz/go-smtpd v0.0.0-20170404230938-deb6d6237625/go.mod h1:HYsPBTaaSFSlLx/70C2HPIMNZpVV8+vt/A+FMnYP11g=
 github.com/buger/jsonparser v0.0.0-20181115193947-bf1c66bbce23/go.mod h1:bbYlZJ7hK1yFx9hf58LP0zeX7UjIGs20ufpu3evjr+s=
 github.com/buger/jsonparser v1.0.0/go.mod h1:tgcrVJ81GPSF0mz+0nu1Xaz0fazGPrmmJfJtxjbHhUQ=
-github.com/caddy-dns/cloudflare v0.0.0-20200811180534-4494da72fa56/go.mod h1:zyQFe5PEtrd6KWYZ+lszFmaHxpWzoyalBN/jzvge2Ss=
 github.com/caddy-dns/cloudflare v0.0.0-20201223223539-f719138a2b29/go.mod h1:zyQFe5PEtrd6KWYZ+lszFmaHxpWzoyalBN/jzvge2Ss=
 github.com/caddy-dns/lego-deprecated v0.0.0-20200811180046-7380877bc825/go.mod h1:j3EF9mTKNg3XjkQ4jQnKa2Kd0tTx1f9zFucS5YB+1rY=
 github.com/caddyserver/caddy/v2 v2.2.0-rc.1/go.mod h1:OUzBaQ53wTVjuTQkq+RdP2fkZe+OzUwuxWVvjHxpPew=
@@ -487,7 +486,6 @@ github.com/mattn/goveralls v0.0.2/go.mod h1:8d1ZMHsd7fW6IRPKQh46F2WRpyib5/X4FOpe
 github.com/matttproud/golang_protobuf_extensions v1.0.1/go.mod h1:D8He9yQNgCq6Z5Ld7szi9bcBfOoFv/3dc6xSMkL2PC0=
 github.com/mholt/acmez v0.1.1-0.20200810215816-dbe88fc6cf09/go.mod h1:8qnn8QA/Ewx8E3ZSsmscqsIjhhpxuy9vqdgbX2ceceM=
 github.com/mholt/acmez v0.1.1/go.mod h1:8qnn8QA/Ewx8E3ZSsmscqsIjhhpxuy9vqdgbX2ceceM=
-github.com/mholt/caddy-l4 v0.0.0-20201218021715-4689395265de/go.mod h1:Te6r9GegBb4YzqoBq0b9axfuz3iSnQoRf4F6VOxTBqY=
 github.com/mholt/caddy-l4 v0.0.0-20201230212151-6587f40d4eb6/go.mod h1:Te6r9GegBb4YzqoBq0b9axfuz3iSnQoRf4F6VOxTBqY=
 github.com/microcosm-cc/bluemonday v1.0.1/go.mod h1:hsXNsILzKxV+sX77C5b8FSuKF00vh2OMYv+xgHpAMF4=
 github.com/miekg/dns v1.0.14/go.mod h1:W1PPwlIAgtquWBMBEV9nkV9Cazfe8ScdGz/Lj7v3Nrg=
