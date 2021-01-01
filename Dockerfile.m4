@@ -44,6 +44,8 @@ m4_ifdef([[CROSS_QEMU]], [[COPY --from=docker.io/hectormolinero/qemu-user-static
 ENV CADDYPATH=/var/lib/caddy
 ENV CADDYLOGPATH=/var/log/caddy
 ENV CADDYWWWPATH=/var/www/html
+ENV XDG_CONFIG_HOME=/var/lib
+ENV XDG_DATA_HOME=/var/lib
 
 # Install system packages
 RUN export DEBIAN_FRONTEND=noninteractive \
@@ -55,19 +57,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		tzdata \
 	&& rm -rf /var/lib/apt/lists/*
 
-# Create users and groups
-ARG CADDY_USER_UID=1000
-ARG CADDY_USER_GID=1000
-RUN groupadd \
-		--gid "${CADDY_USER_GID:?}" \
-		caddy
-RUN useradd \
-		--uid "${CADDY_USER_UID:?}" \
-		--gid "${CADDY_USER_GID:?}" \
-		--shell "$(command -v bash)" \
-		--home-dir "${CADDYPATH:?}" \
-		--no-create-home \
-		caddy
+# Create unprivileged user
+ENV CADDY_USER_UID=1000
+RUN useradd -u "${CADDY_USER_UID:?}" -g 0 -s "$(command -v bash)" -Md "${CADDYPATH:?}" caddy
 
 # Copy Caddy build
 COPY --from=build --chown=root:root /usr/bin/caddy /usr/bin/caddy
@@ -81,18 +73,18 @@ m4_ifdef([[CROSS_QEMU]], [[RUN setcap cap_net_bind_service=+ep CROSS_QEMU]])
 RUN setcap cap_net_bind_service=+ep /usr/bin/caddy
 
 # Create $CADDYPATH directory (Caddy will use this directory to store certificates)
-RUN mkdir -p "${CADDYPATH:?}" && chown caddy:caddy "${CADDYPATH:?}" && chmod 700 "${CADDYPATH:?}"
+RUN mkdir -p "${CADDYPATH:?}" && chown caddy:root "${CADDYPATH:?}" && chmod 775 "${CADDYPATH:?}"
 
 # Create $CADDYLOGPATH directory (although this directory is not used by default)
-RUN mkdir -p "${CADDYLOGPATH:?}" && chown caddy:caddy "${CADDYLOGPATH:?}" && chmod 700 "${CADDYLOGPATH:?}"
+RUN mkdir -p "${CADDYLOGPATH:?}" && chown caddy:root "${CADDYLOGPATH:?}" && chmod 775 "${CADDYLOGPATH:?}"
 
-# Create $CADDYWWWPATH directory (explicitly change owner to root, even if it is not necessary)
-RUN mkdir -p "${CADDYWWWPATH:?}" && chown root:root "${CADDYWWWPATH:?}" && chmod 755 "${CADDYWWWPATH:?}"
+# Create $CADDYWWWPATH directory
+RUN mkdir -p "${CADDYWWWPATH:?}" && chown caddy:root "${CADDYWWWPATH:?}" && chmod 775 "${CADDYWWWPATH:?}"
 RUN HTML_FORMAT='<!DOCTYPE html><title>%s</title><h1>%s</h1>\n'; WELCOME_ARG='Welcome to Caddy!'; \
 	printf "${HTML_FORMAT:?}" "${WELCOME_ARG:?}" "${WELCOME_ARG:?}" > "${CADDYWWWPATH:?}"/index.html
 
 # Drop root privileges
-USER caddy:caddy
+USER caddy:root
 
 ##################################################
 ## "test" stage
