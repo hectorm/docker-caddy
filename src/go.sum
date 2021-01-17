@@ -117,7 +117,7 @@ github.com/boombuler/barcode v1.0.1-0.20190219062509-6c824513bacc/go.mod h1:paBW
 github.com/bradfitz/go-smtpd v0.0.0-20170404230938-deb6d6237625/go.mod h1:HYsPBTaaSFSlLx/70C2HPIMNZpVV8+vt/A+FMnYP11g=
 github.com/buger/jsonparser v0.0.0-20181115193947-bf1c66bbce23/go.mod h1:bbYlZJ7hK1yFx9hf58LP0zeX7UjIGs20ufpu3evjr+s=
 github.com/buger/jsonparser v1.0.0/go.mod h1:tgcrVJ81GPSF0mz+0nu1Xaz0fazGPrmmJfJtxjbHhUQ=
-github.com/caddy-dns/cloudflare v0.0.0-20201223223539-f719138a2b29/go.mod h1:zyQFe5PEtrd6KWYZ+lszFmaHxpWzoyalBN/jzvge2Ss=
+github.com/caddy-dns/cloudflare v0.0.0-20210105070211-eda8e5aa2223/go.mod h1:s31NCxZeQL9UkRJREwnsAsiY/cb+/iEx66eINIDUjqA=
 github.com/caddy-dns/lego-deprecated v0.0.0-20200811180046-7380877bc825/go.mod h1:j3EF9mTKNg3XjkQ4jQnKa2Kd0tTx1f9zFucS5YB+1rY=
 github.com/caddyserver/caddy/v2 v2.2.0-rc.1/go.mod h1:OUzBaQ53wTVjuTQkq+RdP2fkZe+OzUwuxWVvjHxpPew=
 github.com/caddyserver/caddy/v2 v2.2.1/go.mod h1:5Fz/g7UtLz5NORoT/MdlZRAEqoLH4wrxgPUd7Wg58yU=
