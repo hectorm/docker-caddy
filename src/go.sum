@@ -771,6 +771,8 @@ github.com/marten-seemann/qtls v0.10.0/go.mod h1:UvMd1oaYDACI99/oZUYLzMCkBXQVT0a
 github.com/marten-seemann/qtls-go1-15 v0.1.0/go.mod h1:GyFwywLKkRt+6mfU99csTEY1joMZz5vmB1WNZH3P81I=
 github.com/marten-seemann/qtls-go1-15 v0.1.1 h1:LIH6K34bPVttyXnUWixk0bzH6/N07VxbSabxn5A5gZQ=
 github.com/marten-seemann/qtls-go1-15 v0.1.1/go.mod h1:GyFwywLKkRt+6mfU99csTEY1joMZz5vmB1WNZH3P81I=
+github.com/mastercactapus/proxyprotocol v0.0.3 h1:WpDMFKCYdF8NsoA6OrXyNKyZrzMURqqOP1PE7297RCE=
+github.com/mastercactapus/proxyprotocol v0.0.3/go.mod h1:X8FRVEDZz9FkrIoL4QYTBF4Ka4ELwTv0sah0/5NxCPw=
 github.com/matoous/godox v0.0.0-20190911065817-5d6d842e92eb h1:RHba4YImhrUVQDHUCe2BNSOz4tVy2yGyXhvYDvxGgeE=
 github.com/matoous/godox v0.0.0-20190911065817-5d6d842e92eb/go.mod h1:1BELzlh859Sh1c6+90blK8lbYy0kwQf1bYlBhBysy1s=
 github.com/mattn/go-colorable v0.0.9/go.mod h1:9vuHe8Xs5qXnSaW/c/ABM9alt+Vo+STaOChaDxuIBZU=
@@ -798,8 +800,8 @@ github.com/matttproud/golang_protobuf_extensions v1.0.1/go.mod h1:D8He9yQNgCq6Z5
 github.com/mholt/acmez v0.1.1-0.20200810215816-dbe88fc6cf09/go.mod h1:8qnn8QA/Ewx8E3ZSsmscqsIjhhpxuy9vqdgbX2ceceM=
 github.com/mholt/acmez v0.1.1 h1:KQODCqk+hBn3O7qfCRPj6L96uG65T5BSS95FKNEqtdA=
 github.com/mholt/acmez v0.1.1/go.mod h1:8qnn8QA/Ewx8E3ZSsmscqsIjhhpxuy9vqdgbX2ceceM=
-github.com/mholt/caddy-l4 v0.0.0-20210416162802-5f9948fe76ae h1:MJmjIpB0RV9MKhZjNoCm8kMzc7PIWHYaZ58LtPsf3Uw=
-github.com/mholt/caddy-l4 v0.0.0-20210416162802-5f9948fe76ae/go.mod h1:Te6r9GegBb4YzqoBq0b9axfuz3iSnQoRf4F6VOxTBqY=
+github.com/mholt/caddy-l4 v0.0.0-20210503021152-ddf050b16ae0 h1:Wc7Gi5g6QNZ0twQDm1q2W3/Lx081FPoSYEF0Jfu19U4=
+github.com/mholt/caddy-l4 v0.0.0-20210503021152-ddf050b16ae0/go.mod h1:THjbirMPGk2ODmIfBKg/0VEDPVnM8ZXdKRXDJRaPlRE=
 github.com/microcosm-cc/bluemonday v1.0.1 h1:SIYunPjnlXcW+gVfvm0IlSeR5U3WZUOLfVmqg85Go44=
 github.com/microcosm-cc/bluemonday v1.0.1/go.mod h1:hsXNsILzKxV+sX77C5b8FSuKF00vh2OMYv+xgHpAMF4=
 github.com/miekg/dns v1.0.14/go.mod h1:W1PPwlIAgtquWBMBEV9nkV9Cazfe8ScdGz/Lj7v3Nrg=
