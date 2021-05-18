@@ -10,5 +10,5 @@ require (
 	github.com/caddy-dns/lego-deprecated 7380877bc825bf5348496a5b359a35fca1a963ce
 
 	cuelang.org/go v0.3.2
-	github.com/pelletier/go-toml v1.9.0
+	github.com/pelletier/go-toml v1.9.1
 )
