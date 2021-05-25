@@ -9,6 +9,6 @@ require (
 	github.com/caddy-dns/cloudflare v0.0.0-20210510214350-8ea1cff3f818
 	github.com/caddy-dns/lego-deprecated v0.0.0-20210524165322-3ab114dafc6b
 
-	cuelang.org/go v0.3.2
+	cuelang.org/go v0.4.0
 	github.com/pelletier/go-toml v1.9.1
 )
