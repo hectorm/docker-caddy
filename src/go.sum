@@ -176,8 +176,8 @@ github.com/caddyserver/caddy/v2 v2.2.1/go.mod h1:5Fz/g7UtLz5NORoT/MdlZRAEqoLH4wr
 github.com/caddyserver/caddy/v2 v2.3.0-rc.1/go.mod h1:FUVQWJzRkes85vElVb11SzmBferxp3AUvjZ09yf4Wuc=
 github.com/caddyserver/caddy/v2 v2.4.0/go.mod h1:pVJidKm47Cc5VDUrd2VQPSp/d1DzNj2mjg4FQouWEJM=
 github.com/caddyserver/caddy/v2 v2.4.1/go.mod h1:pVJidKm47Cc5VDUrd2VQPSp/d1DzNj2mjg4FQouWEJM=
-github.com/caddyserver/caddy/v2 v2.4.2 h1:chB106RlsIaY4mVEyq9OQM5g/9lHYVputo/LAX2ndFg=
-github.com/caddyserver/caddy/v2 v2.4.2/go.mod h1:kyVbYM0adP2O8zl7hrkwYh2V7nQxDQRyXh0AEi30L5g=
+github.com/caddyserver/caddy/v2 v2.4.3 h1:Y1FaV2N4WO3rBqxSYA8UZsZTQdN+PwcoOcAiZTM8C0I=
+github.com/caddyserver/caddy/v2 v2.4.3/go.mod h1:kyVbYM0adP2O8zl7hrkwYh2V7nQxDQRyXh0AEi30L5g=
 github.com/caddyserver/certmagic v0.12.0/go.mod h1:tr26xh+9fY5dN0J6IPAlMj07qpog22PJKa7Nw7j835U=
 github.com/caddyserver/certmagic v0.12.1-0.20201209195841-b726d1ed13c3/go.mod h1:tr26xh+9fY5dN0J6IPAlMj07qpog22PJKa7Nw7j835U=
 github.com/caddyserver/certmagic v0.13.1/go.mod h1:+zhQtEgLOyXRA/KRduHXNhGGdTeqRM4ePj8eBGD/2CQ=
@@ -816,8 +816,8 @@ github.com/pelletier/go-toml v1.1.0/go.mod h1:5z9KED0ma1S8pY6P1sdut58dfprrGBbd/9
 github.com/pelletier/go-toml v1.2.0/go.mod h1:5z9KED0ma1S8pY6P1sdut58dfprrGBbd/94hg7ilaic=
 github.com/pelletier/go-toml v1.6.0/go.mod h1:5N711Q9dKgbdkxHL+MEfF31hpT7l0S0s/t2kKREewys=
 github.com/pelletier/go-toml v1.8.1/go.mod h1:T2/BmBdy8dvIRq1a/8aqjN41wvWlN4lrapLU/GW4pbc=
-github.com/pelletier/go-toml v1.9.2 h1:7NiByeVF4jKSG1lDF3X8LTIkq2/bu+1uYbIm1eS5tzk=
-github.com/pelletier/go-toml v1.9.2/go.mod h1:u1nR/EPcESfeI/szUZKdtJ0xRNbUoANCkoOuaOx1Y+c=
+github.com/pelletier/go-toml v1.9.3 h1:zeC5b1GviRUyKYd6OJPvBU/mcVDVoL1OhT17FCt5dSQ=
+github.com/pelletier/go-toml v1.9.3/go.mod h1:u1nR/EPcESfeI/szUZKdtJ0xRNbUoANCkoOuaOx1Y+c=
 github.com/performancecopilot/speed v3.0.0+incompatible/go.mod h1:/CLtqpZ5gBg1M9iaPbIdPPGyKcA8hKdoy6hAWba7Yac=
 github.com/pierrec/lz4 v1.0.2-0.20190131084431-473cd7ce01a1/go.mod h1:3/3N9NVKO0jef7pBehbT1qWhCMrIgbYNnFAZCqQ5LRc=
 github.com/pierrec/lz4 v2.0.5+incompatible/go.mod h1:pdkljMzZIN41W+lC3N2tnIh5sFi+IEE17M5jbnwPHcY=
