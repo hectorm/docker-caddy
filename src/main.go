@@ -11,7 +11,6 @@ import (
 	_ "github.com/mholt/caddy-l4"
 
 	_ "github.com/caddy-dns/cloudflare"
-	_ "github.com/caddy-dns/lego-deprecated"
 
 	_ "caddy/modules/cueadapter"
 	_ "caddy/modules/tomladapter"
