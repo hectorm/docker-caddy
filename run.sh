@@ -17,17 +17,17 @@ containerExists() { "${DOCKER:?}" ps -af name="${1:?}" --format '{{.Names}}' | g
 containerIsRunning() { "${DOCKER:?}" ps -f name="${1:?}" --format '{{.Names}}' | grep -Fxq "${1:?}"; }
 
 if ! imageExists "${IMAGE_NAME:?}" && ! imageExists "${IMAGE_NAME#docker.io/}"; then
-	>&2 printf -- '%s\n' "\"${IMAGE_NAME:?}\" image doesn't exist!"
+	>&2 printf '%s\n' "\"${IMAGE_NAME:?}\" image doesn't exist!"
 	exit 1
 fi
 
 if containerIsRunning "${CONTAINER_NAME:?}"; then
-	printf -- '%s\n' "Stopping \"${CONTAINER_NAME:?}\" container..."
+	printf '%s\n' "Stopping \"${CONTAINER_NAME:?}\" container..."
 	"${DOCKER:?}" stop "${CONTAINER_NAME:?}" >/dev/null
 fi
 
 if containerExists "${CONTAINER_NAME:?}"; then
-	printf -- '%s\n' "Removing \"${CONTAINER_NAME:?}\" container..."
+	printf '%s\n' "Removing \"${CONTAINER_NAME:?}\" container..."
 	"${DOCKER:?}" rm "${CONTAINER_NAME:?}" >/dev/null
 fi
 
@@ -35,7 +35,7 @@ if [ -d '/var/www/html/' ]; then
 	WWW_DIRECTORY=/var/www/html/
 fi
 
-printf -- '%s\n' "Creating \"${CONTAINER_NAME:?}\" container..."
+printf '%s\n' "Creating \"${CONTAINER_NAME:?}\" container..."
 "${DOCKER:?}" run --detach \
 	--name "${CONTAINER_NAME:?}" \
 	--hostname "${CONTAINER_NAME:?}" \
@@ -45,5 +45,5 @@ printf -- '%s\n' "Creating \"${CONTAINER_NAME:?}\" container..."
 	${WWW_DIRECTORY:+--mount type=bind,src="${WWW_DIRECTORY:?}",dst='/var/www/html/',ro} \
 	"${IMAGE_NAME:?}" "$@" >/dev/null
 
-printf -- '%s\n\n' 'Done!'
+printf '%s\n\n' 'Done!'
 exec "${DOCKER:?}" logs -f "${CONTAINER_NAME:?}"
