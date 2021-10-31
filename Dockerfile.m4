@@ -24,6 +24,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 # Build Caddy
 COPY --chown=root:root ./src/ /go/src/caddy/
+RUN find /go/src/caddy/ -type d -not -perm 0755 -exec chmod 0755 '{}' ';'
+RUN find /go/src/caddy/ -type f -not -perm 0644 -exec chmod 0644 '{}' ';'
 WORKDIR /go/src/caddy/
 RUN go mod download
 RUN go test -v -short github.com/caddyserver/...
@@ -66,6 +68,8 @@ COPY --from=build --chown=root:root /usr/bin/caddy /usr/bin/caddy
 
 # Copy Caddy config
 COPY --chown=root:root ./config/caddy/ /etc/caddy/
+RUN find /etc/caddy/ -type d -not -perm 0755 -exec chmod 0755 '{}' ';'
+RUN find /etc/caddy/ -type f -not -perm 0644 -exec chmod 0644 '{}' ';'
 
 # Add capabilities to the Caddy binary (this allows Caddy to bind to privileged ports
 # without being root, but creates another layer that increases the image size)
