@@ -90,6 +90,9 @@ RUN HTML_FORMAT='<!DOCTYPE html><title>%s</title><h1>%s</h1>\n'; WELCOME_ARG='We
 # Drop root privileges
 USER caddy:root
 
+ENTRYPOINT ["/usr/bin/caddy"]
+CMD ["run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+
 ##################################################
 ## "test" stage
 ##################################################
@@ -102,10 +105,10 @@ RUN caddy validate --config /etc/caddy/Caddyfile.toml --adapter toml
 RUN caddy validate --config /etc/caddy/Caddyfile.json
 
 ##################################################
-## "caddy" stage
+## "main" stage
 ##################################################
 
-FROM base AS caddy
+FROM base AS main
 
-ENTRYPOINT ["/usr/bin/caddy"]
-CMD ["run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+# Dummy instruction so BuildKit does not skip the test stage
+RUN --mount=type=bind,from=test,source=/mnt/,target=/mnt/
