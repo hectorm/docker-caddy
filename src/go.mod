@@ -7,7 +7,7 @@ require (
 	github.com/caddy-dns/cloudflare v0.0.0-20210607183747-91cf700356a1
 	github.com/caddyserver/caddy/v2 v2.4.6
 	github.com/caddyserver/format-encoder v0.0.0-20210726163217-cd12651f12fd
-	github.com/mholt/caddy-l4 v0.0.0-20210604203514-3cfcafe70883
+	github.com/mholt/caddy-l4 v0.0.0-20211118173712-31d74d38aa3a
 	github.com/pelletier/go-toml v1.9.4
 )
 
