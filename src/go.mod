@@ -3,11 +3,11 @@ module caddy
 go 1.17
 
 require (
-	cuelang.org/go v0.4.1
+	cuelang.org/go v0.4.2
 	github.com/caddy-dns/cloudflare v0.0.0-20210607183747-91cf700356a1
 	github.com/caddyserver/caddy/v2 v2.4.6
 	github.com/caddyserver/format-encoder v0.0.0-20211204173940-c07f2a45108f
-	github.com/mholt/caddy-l4 v0.0.0-20220119222257-2c64f49aba50
+	github.com/mholt/caddy-l4 v0.0.0-20220129235925-56bd7700d889
 	github.com/pelletier/go-toml v1.9.4
 )
 
