@@ -20,7 +20,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get install -y --no-install-recommends \
 		file \
 		mime-support \
-		tzdata
+		tzdata \
+	&& rm -rf /var/lib/apt/lists/*
 
 # Build Caddy
 COPY --chown=root:root ./src/ /go/src/caddy/
