@@ -7,7 +7,7 @@ import (
 
 	_ "github.com/caddyserver/caddy/v2/modules/standard"
 
-	_ "github.com/caddyserver/format-encoder"
+	_ "github.com/caddyserver/transform-encoder"
 	_ "github.com/mholt/caddy-l4"
 
 	_ "github.com/caddy-dns/cloudflare"
