@@ -5,10 +5,10 @@ go 1.18
 require (
 	cuelang.org/go v0.4.3
 	github.com/caddy-dns/cloudflare v0.0.0-20210607183747-91cf700356a1
-	github.com/caddyserver/caddy/v2 v2.5.0
+	github.com/caddyserver/caddy/v2 v2.5.1
 	github.com/caddyserver/transform-encoder v0.0.0-20220319234440-17b694fb69eb
-	github.com/mholt/caddy-l4 v0.0.0-20220420174601-aec6535658b1
-	github.com/pelletier/go-toml v1.9.5
+	github.com/mholt/caddy-l4 v0.0.0-20220503192553-2ecee94d269f
+	github.com/pelletier/go-toml/v2 v2.0.0
 )
 
 require (

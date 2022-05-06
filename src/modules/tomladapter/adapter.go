@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/caddyserver/caddy/v2/caddyconfig"
-	"github.com/pelletier/go-toml"
+	"github.com/pelletier/go-toml/v2"
 
 	"caddy/utils/envreplacer"
 )
@@ -22,11 +22,12 @@ func (a Adapter) Adapt(body []byte, options map[string]interface{}) ([]byte, []c
 	if err != nil {
 		return nil, nil, err
 	}
-	tree, err := toml.LoadBytes(bodyReplaced)
+	doc := map[string]interface{}{}
+	err = toml.Unmarshal(bodyReplaced, &doc)
 	if err != nil {
 		return nil, nil, err
 	}
-	json, err := json.Marshal(tree.ToMap())
+	json, err := json.Marshal(doc)
 	if err != nil {
 		return nil, nil, err
 	}
