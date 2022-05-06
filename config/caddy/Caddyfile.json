@@ -25,8 +25,7 @@
               "handler": "vars",
               "root": "{env.CADDYWWWPATH}"
             }, {
-              "handler": "file_server",
-              "browse": {}
+              "handler": "file_server"
             }]
           }],
           "logs": {

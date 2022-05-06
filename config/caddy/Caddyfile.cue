@@ -19,7 +19,6 @@ apps: http: servers: srv0: {
       root: "{$CADDYWWWPATH}"
     }, {
       handler: "file_server"
-      browse: {}
     }]
   }]
   logs: default_logger_name: "log0"

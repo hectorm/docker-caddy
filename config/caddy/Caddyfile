@@ -1,6 +1,6 @@
 :2015 {
 	root * {$CADDYWWWPATH}
-	file_server * browse
+	file_server *
 
 	log {
 		output stdout
