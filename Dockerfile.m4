@@ -100,10 +100,33 @@ CMD ["run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
 
 FROM base AS test
 
-RUN caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
-RUN caddy validate --config /etc/caddy/Caddyfile.cue --adapter cue
-RUN caddy validate --config /etc/caddy/Caddyfile.toml --adapter toml
+# Install system packages
+USER root:root
+RUN export DEBIAN_FRONTEND=noninteractive \
+	&& apt-get update \
+	&& apt-get install -y --no-install-recommends \
+		curl \
+		diffutils \
+		jq \
+		perl \
+	&& rm -rf /var/lib/apt/lists/*
+USER caddy:root
+
+# Validate configurations
 RUN caddy validate --config /etc/caddy/Caddyfile.json
+RUN caddy validate --config /etc/caddy/Caddyfile      --adapter caddyfile
+RUN caddy validate --config /etc/caddy/Caddyfile.cue  --adapter cue
+RUN caddy validate --config /etc/caddy/Caddyfile.toml --adapter toml
+
+# Compare configurations against the reference JSON
+ENV JQ_CLEANUP_SCRIPT='del(.apps.http.servers.srv0.routes[].handle[].hide)'
+RUN perl -pe 's/\{env\.([0-9A-Z_]+)\}/$ENV{$1}/g' /etc/caddy/Caddyfile.json | jq --sort-keys . > /tmp/Caddyfile.json
+RUN caddy adapt --config /etc/caddy/Caddyfile      --adapter caddyfile | jq --sort-keys "${JQ_CLEANUP_SCRIPT:?}" | diff /tmp/Caddyfile.json -
+RUN caddy adapt --config /etc/caddy/Caddyfile.cue  --adapter cue       | jq --sort-keys "${JQ_CLEANUP_SCRIPT:?}" | diff /tmp/Caddyfile.json -
+RUN caddy adapt --config /etc/caddy/Caddyfile.toml --adapter toml      | jq --sort-keys "${JQ_CLEANUP_SCRIPT:?}" | diff /tmp/Caddyfile.json -
+
+# Run Caddy and validate HTTP request output
+RUN caddy run --config /etc/caddy/Caddyfile --adapter caddyfile & sleep 5 && curl -fsS 'http://127.0.0.1:2015' | grep -q 'Welcome to Caddy!'
 
 ##################################################
 ## "main" stage
