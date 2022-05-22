@@ -8,7 +8,7 @@ require (
 	github.com/caddyserver/caddy/v2 v2.5.1
 	github.com/caddyserver/transform-encoder v0.0.0-20220319234440-17b694fb69eb
 	github.com/mholt/caddy-l4 v0.0.0-20220503192553-2ecee94d269f
-	github.com/pelletier/go-toml/v2 v2.0.0
+	github.com/pelletier/go-toml/v2 v2.0.1
 )
 
 require (
