@@ -1,32 +1,24 @@
-[logging]
+[apps.http.servers.srv0]
+  listen = [":443"]
 
-  [logging.logs.default]
-    exclude = ['http.log.access.log0']
+  [[apps.http.servers.srv0.routes]]
 
-  [logging.logs.log0]
-    include = ['http.log.access.log0']
+    [[apps.http.servers.srv0.routes.handle]]
+      handler = "vars"
+      root = "{$CADDYWWWPATH}"
 
-    [logging.logs.log0.writer]
-      output = 'stdout'
+    [[apps.http.servers.srv0.routes.handle]]
+      handler = "file_server"
 
-    [logging.logs.log0.encoder]
-      format = 'transform'
-      template = '{request>remote_ip} - {request>user_id} [{ts}] "{request>method} {request>uri} {request>proto}" {status} {size} "{request>headers>Referer>[0]}" "{request>headers>User-Agent>[0]}"'
-      time_format = '02/Jan/2006:15:04:05 -0700'
+[[apps.tls.automation.policies]]
+  on_demand = true
 
-[apps]
+  [[apps.tls.automation.policies.issuers]]
+    module = "internal"
 
-  [apps.http.servers.srv0]
-    listen = [':2015']
+[apps.tls.automation.on_demand.rate_limit]
+  interval = 1_000_000_000
+  burst = 1
 
-    [[apps.http.servers.srv0.routes]]
-
-      [[apps.http.servers.srv0.routes.handle]]
-        handler = 'vars'
-        root = '{$CADDYWWWPATH}'
-
-      [[apps.http.servers.srv0.routes.handle]]
-        handler = 'file_server'
-
-    [apps.http.servers.srv0.logs]
-      default_logger_name = 'log0'
+[apps.pki.certificate_authorities.local]
+  install_trust = false

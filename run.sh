@@ -41,7 +41,9 @@ printf '%s\n' "Creating \"${CONTAINER_NAME:?}\" container..."
 	--hostname "${CONTAINER_NAME:?}" \
 	--restart on-failure:3 \
 	--log-opt max-size=32m \
-	--publish '2015:2015/tcp' \
+	--publish '80:80/tcp' \
+	--publish '443:443/tcp' \
+	--publish '443:443/udp' \
 	${WWW_DIRECTORY:+--mount type=bind,src="${WWW_DIRECTORY:?}",dst='/var/www/html/',ro} \
 	"${IMAGE_NAME:?}" "$@" >/dev/null
 

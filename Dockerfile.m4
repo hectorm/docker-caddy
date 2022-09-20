@@ -126,7 +126,7 @@ RUN caddy adapt --config /etc/caddy/Caddyfile.cue  --adapter cue       | jq --so
 RUN caddy adapt --config /etc/caddy/Caddyfile.toml --adapter toml      | jq --sort-keys "${JQ_CLEANUP_SCRIPT:?}" | diff /tmp/Caddyfile.json -
 
 # Run Caddy and validate HTTP request output
-RUN caddy run --config /etc/caddy/Caddyfile --adapter caddyfile & sleep 5 && curl -fsS 'http://127.0.0.1:2015' | grep -q 'Welcome to Caddy!'
+RUN caddy run --config /etc/caddy/Caddyfile --adapter caddyfile & sleep 5 && curl -fsSLkv 'http://127.0.0.1:80' | grep -q 'Welcome to Caddy!'
 
 ##################################################
 ## "main" stage
