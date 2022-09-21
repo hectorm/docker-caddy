@@ -1,3 +1,17 @@
+logging: logs: {
+  default: {
+    exclude: ["http.log.access.log0"]
+  },
+  log0: {
+    writer: output: "stdout"
+    encoder: {
+      format: "transform"
+      template: #"{common_log}"#
+    }
+    include: ["http.log.access.log0"]
+  }
+}
+
 apps: {
   http: servers: srv0: {
     listen: [":443"]
@@ -9,6 +23,7 @@ apps: {
         handler: "file_server"
       }]
     }]
+    logs: default_logger_name: "log0"
   }
   tls: automation: {
     policies: [{

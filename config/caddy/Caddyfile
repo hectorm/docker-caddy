@@ -13,4 +13,9 @@
 	tls internal {
 		on_demand
 	}
+
+	log {
+		output stdout
+		format transform "{common_log}"
+	}
 }
