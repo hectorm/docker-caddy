@@ -7,7 +7,7 @@
 }
 
 :443 {
-	root * {$CADDYWWWPATH}
+	root * {$CADDYWWWPATH:/var/www/html}
 	file_server *
 
 	tls internal {

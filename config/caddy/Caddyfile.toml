@@ -18,7 +18,7 @@
 
     [[apps.http.servers.srv0.routes.handle]]
       handler = "vars"
-      root = "{$CADDYWWWPATH}"
+      root = "{$CADDYWWWPATH:/var/www/html}"
 
     [[apps.http.servers.srv0.routes.handle]]
       handler = "file_server"

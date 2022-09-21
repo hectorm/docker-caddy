@@ -1,8 +1,8 @@
 package cueadapter
 
 import (
-	"github.com/caddyserver/caddy/v2/caddyconfig"
 	"cuelang.org/go/cue"
+	"github.com/caddyserver/caddy/v2/caddyconfig"
 
 	"caddy/utils/envreplacer"
 )

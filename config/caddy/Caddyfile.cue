@@ -18,7 +18,7 @@ apps: {
     routes: [{
       handle: [{
         handler: "vars"
-        root: "{$CADDYWWWPATH}"
+        root: "{$CADDYWWWPATH:/var/www/html}"
       }, {
         handler: "file_server"
       }]
