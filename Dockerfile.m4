@@ -55,6 +55,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		ca-certificates \
+		curl \
 		libcap2-bin \
 		mime-support \
 		tzdata \
@@ -105,7 +106,6 @@ USER root:root
 RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends \
-		curl \
 		diffutils \
 		jq \
 		perl \
