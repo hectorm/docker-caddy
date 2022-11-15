@@ -19,6 +19,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		file \
+		libcap2-bin \
 		mime-support \
 		tzdata \
 	&& rm -rf /var/lib/apt/lists/*
@@ -31,6 +32,7 @@ WORKDIR /go/src/caddy/
 RUN go mod download
 RUN go test -v -short github.com/caddyserver/...
 RUN go build -v -o ./caddy -ldflags '-s -w' ./main.go
+RUN setcap cap_net_bind_service=+ep ./caddy
 RUN mv ./caddy /usr/bin/caddy
 RUN file /usr/bin/caddy
 RUN /usr/bin/caddy version
@@ -56,7 +58,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get install -y --no-install-recommends \
 		ca-certificates \
 		curl \
-		libcap2-bin \
 		mime-support \
 		tzdata \
 	&& rm -rf /var/lib/apt/lists/*
@@ -72,11 +73,6 @@ COPY --from=build --chown=root:root /usr/bin/caddy /usr/bin/caddy
 COPY --chown=root:root ./config/caddy/ /etc/caddy/
 RUN find /etc/caddy/ -type d -not -perm 0755 -exec chmod 0755 '{}' ';'
 RUN find /etc/caddy/ -type f -not -perm 0644 -exec chmod 0644 '{}' ';'
-
-# Add capabilities to the Caddy binary (this allows Caddy to bind to privileged ports
-# without being root, but creates another layer that increases the image size)
-m4_ifdef([[CROSS_QEMU]], [[RUN setcap cap_net_bind_service=+ep CROSS_QEMU]])
-RUN setcap cap_net_bind_service=+ep /usr/bin/caddy
 
 # Create $CADDYPATH directory (Caddy will use this directory to store certificates)
 RUN mkdir -p "${CADDYPATH:?}" && chown caddy:root "${CADDYPATH:?}" && chmod 775 "${CADDYPATH:?}"
