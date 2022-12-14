@@ -6,12 +6,13 @@ require (
 	cuelang.org/go v0.4.3
 	github.com/caddy-dns/cloudflare v0.0.0-20221129173028-ed330a80c094
 	github.com/caddyserver/caddy/v2 v2.6.2
-	github.com/caddyserver/transform-encoder v0.0.0-20221014000013-f79842b793d4
-	github.com/mholt/caddy-l4 v0.0.0-20221130231939-99bc69cc447c
+	github.com/caddyserver/transform-encoder v0.0.0-20221214192817-b3b302b5455c
+	github.com/mholt/caddy-l4 v0.0.0-20221205182150-121f2ada2481
 	github.com/pelletier/go-toml/v2 v2.0.6
 )
 
 require (
+	cloud.google.com/go/compute/metadata v0.2.2 // indirect
 	filippo.io/edwards25519 v1.0.0 // indirect
 	github.com/AndreasBriese/bbloom v0.0.0-20190825152654-46b345b51c96 // indirect
 	github.com/BurntSushi/toml v1.2.1 // indirect
@@ -62,7 +63,7 @@ require (
 	github.com/jackc/pgservicefile v0.0.0-20200714003250-2b9c44734f2b // indirect
 	github.com/jackc/pgtype v1.9.1 // indirect
 	github.com/jackc/pgx/v4 v4.14.1 // indirect
-	github.com/klauspost/compress v1.15.12 // indirect
+	github.com/klauspost/compress v1.15.13 // indirect
 	github.com/klauspost/cpuid/v2 v2.1.2 // indirect
 	github.com/libdns/cloudflare v0.1.0 // indirect
 	github.com/libdns/libdns v0.2.1 // indirect
@@ -127,7 +128,7 @@ require (
 	go.uber.org/multierr v1.8.0 // indirect
 	go.uber.org/zap v1.23.0 // indirect
 	golang.org/x/crypto v0.3.0 // indirect
-	golang.org/x/exp v0.0.0-20221126150942-6ab00d035af9 // indirect
+	golang.org/x/exp v0.0.0-20221212164502-fae10dda9338 // indirect
 	golang.org/x/mod v0.6.0 // indirect
 	golang.org/x/net v0.2.0 // indirect
 	golang.org/x/sys v0.2.0 // indirect
@@ -135,8 +136,8 @@ require (
 	golang.org/x/text v0.4.0 // indirect
 	golang.org/x/time v0.0.0-20220922220347-f3bd1da661af // indirect
 	golang.org/x/tools v0.2.0 // indirect
-	google.golang.org/genproto v0.0.0-20221201164419-0e50fba7f41c // indirect
-	google.golang.org/grpc v1.50.1 // indirect
+	google.golang.org/genproto v0.0.0-20221207170731-23e4bf6bdc37 // indirect
+	google.golang.org/grpc v1.51.0 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
 	gopkg.in/square/go-jose.v2 v2.6.0 // indirect
