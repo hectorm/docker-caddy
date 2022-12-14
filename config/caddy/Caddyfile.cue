@@ -1,7 +1,7 @@
 logging: logs: {
   default: {
     exclude: ["http.log.access.log0"]
-  },
+  }
   log0: {
     writer: output: "stdout"
     encoder: {
