@@ -8,7 +8,7 @@ require (
 	github.com/caddyserver/caddy/v2 v2.6.4
 	github.com/caddyserver/transform-encoder v0.0.0-20221219003909-44f7460143b7
 	github.com/mholt/caddy-l4 v0.0.0-20230131204029-58d19ae52d60
-	github.com/pelletier/go-toml/v2 v2.0.6
+	github.com/pelletier/go-toml/v2 v2.0.7
 )
 
 require (
@@ -44,27 +44,27 @@ require (
 	github.com/go-logfmt/logfmt v0.5.1 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
-	github.com/go-sql-driver/mysql v1.6.0 // indirect
+	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20210107165309-348f09dbbbc0 // indirect
 	github.com/golang/glog v1.0.0 // indirect
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/cel-go v0.13.0 // indirect
-	github.com/google/pprof v0.0.0-20230222194610-99052d3372e7 // indirect
+	github.com/google/pprof v0.0.0-20230228050547-1710fef4ab10 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.7.3 // indirect
 	github.com/huandu/xstrings v1.3.3 // indirect
 	github.com/imdario/mergo v0.3.13 // indirect
 	github.com/inconshreveable/mousetrap v1.0.1 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
-	github.com/jackc/pgconn v1.13.0 // indirect
+	github.com/jackc/pgconn v1.14.0 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgproto3/v2 v2.3.2 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
-	github.com/jackc/pgtype v1.12.0 // indirect
-	github.com/jackc/pgx/v4 v4.17.2 // indirect
+	github.com/jackc/pgtype v1.14.0 // indirect
+	github.com/jackc/pgx/v4 v4.18.1 // indirect
 	github.com/klauspost/compress v1.15.15 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.4 // indirect
 	github.com/libdns/cloudflare v0.1.0 // indirect
@@ -100,7 +100,7 @@ require (
 	github.com/sirupsen/logrus v1.9.0 // indirect
 	github.com/slackhq/nebula v1.6.1 // indirect
 	github.com/smallstep/certificates v0.23.2 // indirect
-	github.com/smallstep/nosql v0.5.0 // indirect
+	github.com/smallstep/nosql v0.5.1 // indirect
 	github.com/smallstep/truststore v0.12.1 // indirect
 	github.com/spf13/cast v1.4.1 // indirect
 	github.com/spf13/cobra v1.6.1 // indirect
@@ -129,7 +129,7 @@ require (
 	go.uber.org/atomic v1.10.0 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
 	go.uber.org/zap v1.24.0 // indirect
-	golang.org/x/crypto v0.5.0 // indirect
+	golang.org/x/crypto v0.6.0 // indirect
 	golang.org/x/exp v0.0.0-20230224173230-c95f2b4c22f2 // indirect
 	golang.org/x/mod v0.7.0 // indirect
 	golang.org/x/net v0.7.0 // indirect
@@ -139,7 +139,7 @@ require (
 	golang.org/x/text v0.7.0 // indirect
 	golang.org/x/time v0.0.0-20220922220347-f3bd1da661af // indirect
 	golang.org/x/tools v0.3.0 // indirect
-	google.golang.org/genproto v0.0.0-20230223222841-637eb2293923 // indirect
+	google.golang.org/genproto v0.0.0-20230301171018-9ab4bdc49ad5 // indirect
 	google.golang.org/grpc v1.53.0 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1 // indirect
