@@ -15,26 +15,31 @@
   listen = [":443"]
 
   [[apps.http.servers.srv0.routes]]
+    terminal = true
+
+    [[apps.http.servers.srv0.routes.match]]
+      host = ["localhost"]
 
     [[apps.http.servers.srv0.routes.handle]]
-      handler = "vars"
-      root = "{$CADDYWWWPATH:/var/www/html}"
+      handler = "subroute"
 
-    [[apps.http.servers.srv0.routes.handle]]
-      handler = "file_server"
+      [[apps.http.servers.srv0.routes.handle.routes]]
 
-  [apps.http.servers.srv0.logs]
-    default_logger_name = "log0"
+        [[apps.http.servers.srv0.routes.handle.routes.handle]]
+          handler = "vars"
+          root = "{$CADDYWWWPATH:/var/www/html}"
+
+        [[apps.http.servers.srv0.routes.handle.routes.handle]]
+          handler = "file_server"
+
+  [apps.http.servers.srv0.logs.logger_names]
+    localhost = "log0"
 
 [[apps.tls.automation.policies]]
-  on_demand = true
+  subjects = ["localhost"]
 
   [[apps.tls.automation.policies.issuers]]
     module = "internal"
-
-[apps.tls.automation.on_demand.rate_limit]
-  interval = 1_000_000_000
-  burst = 1
 
 [apps.pki.certificate_authorities.local]
   install_trust = false

@@ -115,14 +115,15 @@ RUN caddy validate --config /etc/caddy/Caddyfile.cue  --adapter cue
 RUN caddy validate --config /etc/caddy/Caddyfile.toml --adapter toml
 
 # Compare configurations against the reference JSON
-ENV JQ_CLEANUP_SCRIPT='del(.apps.http.servers.srv0.routes[].handle[].hide)'
+ENV JQ_CLEANUP_SCRIPT='walk(if (type == "object" and .handler == "file_server") then del(.hide) else . end)'
 RUN perl -pe 's/\{env\.([0-9A-Z_]+)\}/$ENV{$1}/g' /etc/caddy/Caddyfile.json | jq --sort-keys . > /tmp/Caddyfile.json
 RUN caddy adapt --config /etc/caddy/Caddyfile      --adapter caddyfile | jq --sort-keys "${JQ_CLEANUP_SCRIPT:?}" | diff /tmp/Caddyfile.json -
 RUN caddy adapt --config /etc/caddy/Caddyfile.cue  --adapter cue       | jq --sort-keys "${JQ_CLEANUP_SCRIPT:?}" | diff /tmp/Caddyfile.json -
 RUN caddy adapt --config /etc/caddy/Caddyfile.toml --adapter toml      | jq --sort-keys "${JQ_CLEANUP_SCRIPT:?}" | diff /tmp/Caddyfile.json -
 
 # Run Caddy and validate HTTP request output
-RUN caddy run --config /etc/caddy/Caddyfile --adapter caddyfile & sleep 5 && curl -fsSLkv 'http://127.0.0.1:80' | grep -q 'Welcome to Caddy!'
+RUN caddy run --config /etc/caddy/Caddyfile --adapter caddyfile & \
+	timeout 60 sh -euc 'until curl -fsSLkv "http://localhost:80" | grep -q "Welcome to Caddy!"; do sleep 1; done'
 
 ##################################################
 ## "main" stage

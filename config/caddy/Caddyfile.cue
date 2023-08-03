@@ -16,26 +16,33 @@ apps: {
   http: servers: srv0: {
     listen: [":443"]
     routes: [{
+      terminal: true,
+      match: [{
+        host: ["localhost"]
+      }]
       handle: [{
-        handler: "vars"
-        root: "{$CADDYWWWPATH:/var/www/html}"
-      }, {
-        handler: "file_server"
+        handler: "subroute"
+        routes: [{
+          handle: [{
+            handler: "vars"
+            root: "{$CADDYWWWPATH:/var/www/html}"
+          }, {
+            handler: "file_server"
+          }]
+        }]
       }]
     }]
-    logs: default_logger_name: "log0"
+    logs: logger_names: {
+      localhost: "log0"
+    }
   }
   tls: automation: {
     policies: [{
+      subjects: ["localhost"]
       issuers: [{
         module: "internal"
       }]
-      on_demand: true
     }]
-    on_demand: rate_limit: {
-      interval: 1000000000
-      burst: 1
-    }
   }
   pki: certificate_authorities: local: {
     install_trust: false

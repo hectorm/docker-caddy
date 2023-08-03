@@ -1,18 +1,12 @@
 {
-	on_demand_tls {
-		interval 1s
-		burst 1
-	}
 	skip_install_trust
 }
 
-:443 {
+localhost:443 {
 	root * {$CADDYWWWPATH:/var/www/html}
 	file_server *
 
-	tls internal {
-		on_demand
-	}
+	tls internal
 
 	log {
 		output stdout
