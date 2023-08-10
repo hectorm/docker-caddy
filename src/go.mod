@@ -1,13 +1,13 @@
 module caddy
 
-go 1.20
+go 1.21
 
 require (
-	cuelang.org/go v0.5.0
+	cuelang.org/go v0.6.0
 	github.com/caddy-dns/cloudflare v0.0.0-20230807034102-74f004e1c1ab
 	github.com/caddyserver/caddy/v2 v2.7.3
 	github.com/caddyserver/transform-encoder v0.0.0-20230707173452-ec0c4fcc953b
-	github.com/mholt/caddy-l4 v0.0.0-20230807185606-a5c08c5a3d44
+	github.com/mholt/caddy-l4 v0.0.0-20230809152347-4e8aaac46581
 	github.com/pelletier/go-toml/v2 v2.0.9
 )
 
@@ -29,7 +29,7 @@ require (
 	github.com/cespare/xxhash v1.1.0 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/chzyer/readline v1.5.1 // indirect
-	github.com/cockroachdb/apd/v2 v2.0.2 // indirect
+	github.com/cockroachdb/apd/v3 v3.2.0 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/dgraph-io/badger v1.6.2 // indirect
 	github.com/dgraph-io/badger/v2 v2.2007.4 // indirect
@@ -47,7 +47,7 @@ require (
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-sql-driver/mysql v1.7.1 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 // indirect
-	github.com/golang/glog v1.1.1 // indirect
+	github.com/golang/glog v1.1.2 // indirect
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
@@ -55,7 +55,7 @@ require (
 	github.com/google/certificate-transparency-go v1.1.6 // indirect
 	github.com/google/go-tpm v0.3.3 // indirect
 	github.com/google/go-tspi v0.3.0 // indirect
-	github.com/google/pprof v0.0.0-20230728192033-2ba5b33183c6 // indirect
+	github.com/google/pprof v0.0.0-20230808223545-4887780b67fb // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.15.2 // indirect
 	github.com/huandu/xstrings v1.4.0 // indirect
@@ -94,7 +94,7 @@ require (
 	github.com/prometheus/procfs v0.11.1 // indirect
 	github.com/quic-go/qpack v0.4.0 // indirect
 	github.com/quic-go/qtls-go1-20 v0.3.2 // indirect
-	github.com/quic-go/quic-go v0.37.3 // indirect
+	github.com/quic-go/quic-go v0.37.4 // indirect
 	github.com/rs/xid v1.5.0 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/shopspring/decimal v1.3.1 // indirect
@@ -138,7 +138,7 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.25.0 // indirect
 	golang.org/x/crypto v0.12.0 // indirect
-	golang.org/x/exp v0.0.0-20230801115018-d63ba01acd4b // indirect
+	golang.org/x/exp v0.0.0-20230810033253-352e893a4cad // indirect
 	golang.org/x/mod v0.12.0 // indirect
 	golang.org/x/net v0.14.0 // indirect
 	golang.org/x/sync v0.3.0 // indirect
