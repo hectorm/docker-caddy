@@ -33,7 +33,7 @@
           handler = "file_server"
 
   [apps.http.servers.srv0.logs.logger_names]
-    localhost = "log0"
+    localhost = ["log0"]
 
 [[apps.tls.automation.policies]]
   subjects = ["localhost"]

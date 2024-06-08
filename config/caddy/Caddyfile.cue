@@ -33,7 +33,7 @@ apps: {
       }]
     }]
     logs: logger_names: {
-      localhost: "log0"
+      localhost: ["log0"]
     }
   }
   tls: automation: {
