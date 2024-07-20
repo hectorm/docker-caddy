@@ -72,7 +72,6 @@ $(IMAGE_AMD64_DOCKERFILE): $(DOCKERFILE_TEMPLATE)
 	'$(M4)' \
 		--prefix-builtins \
 		--define=CROSS_ARCH=amd64 \
-		--define=CROSS_QEMU=/usr/bin/qemu-x86_64-static \
 		--define=CROSS_GOOS=linux \
 		--define=CROSS_GOARCH=amd64 \
 		'$(DOCKERFILE_TEMPLATE)' > '$@'
@@ -90,7 +89,6 @@ $(IMAGE_ARM64V8_DOCKERFILE): $(DOCKERFILE_TEMPLATE)
 	'$(M4)' \
 		--prefix-builtins \
 		--define=CROSS_ARCH=arm64v8 \
-		--define=CROSS_QEMU=/usr/bin/qemu-aarch64-static \
 		--define=CROSS_GOOS=linux \
 		--define=CROSS_GOARCH=arm64 \
 		'$(DOCKERFILE_TEMPLATE)' > '$@'
@@ -108,7 +106,6 @@ $(IMAGE_ARM32V7_DOCKERFILE): $(DOCKERFILE_TEMPLATE)
 	'$(M4)' \
 		--prefix-builtins \
 		--define=CROSS_ARCH=arm32v7 \
-		--define=CROSS_QEMU=/usr/bin/qemu-arm-static \
 		--define=CROSS_GOOS=linux \
 		--define=CROSS_GOARCH=arm \
 		--define=CROSS_GOARM=7 \
