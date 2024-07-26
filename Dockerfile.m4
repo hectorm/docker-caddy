@@ -19,7 +19,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get install -y --no-install-recommends \
 		file \
 		libcap2-bin \
-		mime-support \
+		media-types \
 		tzdata \
 	&& rm -rf /var/lib/apt/lists/*
 
@@ -41,7 +41,7 @@ RUN /usr/bin/caddy list-modules --versions
 ## "base" stage
 ##################################################
 
-m4_ifdef([[CROSS_ARCH]], [[FROM docker.io/CROSS_ARCH/ubuntu:22.04]], [[FROM docker.io/ubuntu:22.04]]) AS base
+m4_ifdef([[CROSS_ARCH]], [[FROM docker.io/CROSS_ARCH/ubuntu:24.04]], [[FROM docker.io/ubuntu:24.04]]) AS base
 
 # Environment
 ENV CADDYPATH=/var/lib/caddy
@@ -56,13 +56,12 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get install -y --no-install-recommends \
 		ca-certificates \
 		curl \
-		mime-support \
+		media-types \
 		tzdata \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Create unprivileged user
-ENV CADDY_USER_UID=1000
-RUN useradd -u "${CADDY_USER_UID:?}" -g 0 -s "$(command -v bash)" -Md "${CADDYPATH:?}" caddy
+RUN userdel -rf "$(id -nu 1000)" && useradd -u 1000 -g 0 -s "$(command -v bash)" -Md "${CADDYPATH:?}" caddy
 
 # Copy Caddy build
 COPY --from=build --chown=root:root /usr/bin/caddy /usr/bin/caddy
