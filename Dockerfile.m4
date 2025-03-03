@@ -29,7 +29,7 @@ RUN find /go/src/caddy/ -type d -not -perm 0755 -exec chmod 0755 '{}' ';'
 RUN find /go/src/caddy/ -type f -not -perm 0644 -exec chmod 0644 '{}' ';'
 WORKDIR /go/src/caddy/
 RUN go mod download
-RUN go test -v -short github.com/caddyserver/... github.com/mholt/caddy-l4/...
+RUN GODEBUG='rsa1024min=0' go test -v -short github.com/caddyserver/... github.com/mholt/caddy-l4/...
 RUN go build -v -o ./caddy -ldflags '-s -w' ./main.go
 RUN setcap cap_net_bind_service=+ep ./caddy
 RUN mv ./caddy /usr/bin/caddy
