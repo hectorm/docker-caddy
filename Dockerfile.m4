@@ -4,7 +4,7 @@ m4_changequote([[, ]])
 ## "build" stage
 ##################################################
 
-FROM --platform=${BUILDPLATFORM} docker.io/golang:1.24-bookworm AS build
+FROM --platform=${BUILDPLATFORM} docker.io/golang:1.25-bookworm AS build
 
 # Environment
 ENV GO111MODULE=on
